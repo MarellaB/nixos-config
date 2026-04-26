@@ -106,12 +106,14 @@
 	  # Install firefox.
 	  programs.firefox.enable = true;
 
-	  programs.neovim = {
+/**
+	  programs.kitty = {
 		enable = true;
-		defaultEditor = true;
-		vimAlias = true;
-		viAlias = true;
+		settings = {
+			term = "xterm-256color";
+		};
 	  };
+*/
 
 	  # Allow unfree packages
 	  nixpkgs.config.allowUnfree = true;
@@ -120,7 +122,6 @@
 	  # $ nix search wget
 	  environment.systemPackages = with pkgs; [
 			git
-			tmux
 			discord
 			kitty
 			xwayland-satellite # X11 Compatability for Wayland

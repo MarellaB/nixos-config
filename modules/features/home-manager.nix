@@ -7,10 +7,26 @@
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
     home-manager.backupFileExtension = "backup";
+
     home-manager.users.brandon = {
       home.stateVersion = "25.11";
       home.username = "brandon";
       home.homeDirectory = "/home/brandon";
+
+      home.packages = with pkgs; [
+        gcc
+        
+        # LSPs
+        lua-language-server
+        marksman
+        taplo
+        shfmt
+        hadolint
+        tree-sitter
+
+        ripgrep
+        fd
+      ];
 
       home.pointerCursor = {
 		gtk.enable = true;
@@ -30,6 +46,49 @@
 			pull.rebase = false;
 		};
       };
+
+      programs.starship = {
+	  enable = true;
+	  settings = {
+	    add_newline = true;
+	    format = "[ ](bg:#2e3440)[ ](bg:#3b4252 fg:#2e3440)[ ](bg:#434c5e fg:#3b4252)[](bg:#88c0d0 fg:#434c5e)[  󰣇  ](bg:#88c0d0 fg:#434c5e)[ ](bg:#81a1c1 fg:#88c0d0)[$directory](bg:#81a1c1 fg:#000000)[ ](bg:#81a1c1 fg:#81a1c1)[ ](fg:#81a1c1)\n";
+	    directory = {
+	      style = "fg:#434c5e bg:#81a1c1";
+	      format = "[ $path ]($style)";
+	      truncation_length = 3;
+	      truncation_symbol = ".../";
+	    };
+	  };
+	};
+
+	programs.neovim = {
+	  enable = true;
+	  defaultEditor = true;
+	  vimAlias = true;
+	  viAlias = true;
+	};
+
+	xdg.configFile."nvim" = {
+	  source = ./nvim;
+	  recursive = true;
+	};
+
+  xdg.configFile."nvim/lazy-lock.json".enable = false;
+
+	programs.tmux = {
+	  enable = true;
+	  prefix = "C-Space";
+	  baseIndex = 1;
+	  terminal = "tmux-256color";
+	  plugins = with pkgs.tmuxPlugins; [
+	    nord
+	    vim-tmux-navigator
+	  ];
+	  extraConfig = ''
+	    bind-key P display-popup -w 80% -h 80% -E
+	    set -g pane-border-lines double
+	  '';
+	};
 
       programs.ssh = {
 		enable = true;
