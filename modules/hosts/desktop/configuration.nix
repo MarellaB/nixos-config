@@ -125,6 +125,7 @@
 			discord
 			kitty
 			xwayland-satellite # X11 Compatability for Wayland
+      claude-code
 	  ];
 
 		programs.steam = {
