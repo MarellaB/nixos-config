@@ -15,6 +15,8 @@
 
       home.packages = with pkgs; [
         gcc
+        playerctl
+        lazygit
         
         # LSPs
         lua-language-server
@@ -47,11 +49,16 @@
 		};
       };
 
+      programs.kitty = {
+        enable = true;
+        theme = "Nord";
+      };
+
       programs.starship = {
 	  enable = true;
 	  settings = {
 	    add_newline = true;
-	    format = "[ ](bg:#2e3440)[ ](bg:#3b4252 fg:#2e3440)[ ](bg:#434c5e fg:#3b4252)[](bg:#88c0d0 fg:#434c5e)[  󰣇  ](bg:#88c0d0 fg:#434c5e)[ ](bg:#81a1c1 fg:#88c0d0)[$directory](bg:#81a1c1 fg:#000000)[ ](bg:#81a1c1 fg:#81a1c1)[ ](fg:#81a1c1)\n";
+	    format = "[ ](bg:#3b4252 fg:#2e3440)[ ](bg:#434c5e fg:#3b4252)[ ](bg:#88c0d0 fg:#434c5e)[󱄅 ](bg:#88c0d0 fg:#434c5e)[ ](bg:#81a1c1 fg:#88c0d0)[$directory](bg:#81a1c1 fg:#000000)[ ](bg:#81a1c1 fg:#81a1c1)[ ](fg:#81a1c1)\n";
 	    directory = {
 	      style = "fg:#434c5e bg:#81a1c1";
 	      format = "[ $path ]($style)";
@@ -89,17 +96,34 @@
 	  extraConfig = ''
 	    bind-key P display-popup -w 80% -h 80% -E
 	    set -g pane-border-lines double
+      bind -r Left resize-pane -L 5
+      bind -r Right resize-pane -R 5
+      bind -r Up resize-pane -U 5
+      bind -r Down resize-pane -D 5
+      set -g repeat-time 1000
 	  '';
 	};
 
       programs.ssh = {
 		enable = true;
+		enableDefaultConfig = false; # This is deprecated, so setting to false now to get ahead
 		matchBlocks = {
 			"github.com" = {
 				identityFile = "~/.ssh/id_ed25519";
 				user = "git";
 			};
-
+			"*" = {
+				forwardAgent = false;
+				addKeysToAgent = "no";
+				compression = false;
+				serverAliveInterval = 0;
+				serverAliveCountMax = 3;
+				hashKnownHosts = false;
+				userKnownHostsFile = "~/.ssh/known_hosts";
+				controlMaster = "no";
+				controlPath = "~/.ssh/master-%r@%n:%p";
+				controlPersist = "no";
+			};
 		};
       };
 
@@ -124,23 +148,43 @@
             gaps_in = 6;
             gaps_out = 12;
           };
-	  animations = {
-		enabled = true;
-		animation = [
-			"windows,1,2,default"
-			"border,1,2,default"
-			"fade,1,2,default"
-			"workspaces,1,2,default"
-		];
-	  };
+          workspace = [
+            "1, monitor:DP-1"
+            "2, monitor:DP-1"
+            "3, monitor:DP-1"
+            "4, monitor:DP-1"
+            "5, monitor:DP-1"
+            "6, monitor:DP-1"
+            "7, monitor:DP-1"
+
+            "8, monitor:DP-3"
+            "9, monitor:HDMI-A-1"
+            "10, monitor:DP-2"
+          ];
+          animations = {
+            enabled = true;
+            animation = [
+              "windows,1,2,default"
+              "border,1,2,default"
+              "fade,1,2,default"
+              "workspaces,1,2,default"
+            ];
+          };
           "$mod" = "SUPER";
           bind = [
             "$mod, C, exec, ${lib.getExe pkgs.kitty}"
             "$mod, Q, killactive"
+            "$mod SHIFT, Q, forcekillactive"
             "$mod, B, exec, ${lib.getExe pkgs.firefox}"
             "$mod SHIFT, F, fullscreen, 0"
+            "$mod, P, pseudo"
+            "$mod, V, togglefloating"
             "$mod CTRL SHIFT, L, exec, ${lib.getExe pkgs.hyprlock}"
             "$mod, Space, exec, ${lib.getExe myNoctalia} ipc call launcher toggle"
+
+            # Auto-Center a window
+            "$mod SHIFT, P, exec, hyprctl dispatch resizeactive exact 2560 1440 && hyprctl dispatch centerwindow"
+
             "$mod, H, movefocus, l"
             "$mod SHIFT, H, movewindow, l"
             "$mod, L, movefocus, r"
@@ -149,6 +193,7 @@
             "$mod SHIFT, Up, movewindow, u"
             "$mod, Down, movefocus, d"
             "$mod SHIFT, Down, movewindow, d"
+
             "$mod, 1, workspace, 1"
             "$mod, 2, workspace, 2"
             "$mod, 3, workspace, 3"
@@ -156,6 +201,9 @@
             "$mod, 5, workspace, 5"
             "$mod, 6, workspace, 6"
             "$mod, 7, workspace, 7"
+            "$mod, 8, workspace, 8"
+            "$mod, 9, workspace, 9"
+            "$mod, 0, workspace, 10"
             "$mod SHIFT, 1, movetoworkspace, 1"
             "$mod SHIFT, 2, movetoworkspace, 2"
             "$mod SHIFT, 3, movetoworkspace, 3"
@@ -163,21 +211,30 @@
             "$mod SHIFT, 5, movetoworkspace, 5"
             "$mod SHIFT, 6, movetoworkspace, 6"
             "$mod SHIFT, 7, movetoworkspace, 7"
-            "$mod, 8, focusmonitor, DP-3"
-            "$mod, 9, focusmonitor, HDMI-A-1"
-            "$mod, 0, focusmonitor, DP-2"
-            "$mod SHIFT, 8, movewindow, mon:DP-3"
-            "$mod SHIFT, 9, movewindow, mon:HDMI-A-1"
-            "$mod SHIFT, 0, movewindow, mon:DP-2"
+            "$mod SHIFT, 8, movetoworkspace, 8"
+            "$mod SHIFT, 9, movetoworkspace, 9"
+            "$mod SHIFT, 0, movetoworkspace, 10"
+
+            "$mod, S, togglespecialworkspace"
+            "$mod SHIFT, S, movetoworkspace, special"
           ];
-	  bindm = [
-		"$mod, mouse:272, movewindow"
-		"$mod, mouse:273, resizewindow"
-	  ];
-	  env = [
-		"XCURSOR_THEME,Adwaita"
-		"XCURSOR_SIZE,24"
-	  ];
+          bindl = [
+            ", XF86AudioPlay, exec, playerctl play-pause"
+            ", XF86AudioPause, exec, playerctl play-pause"
+            ", XF86AudioNext, exec, playerctl next"
+            ", XF86AudioPrev, exec, playerctl previous"
+            ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+            ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+            ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          ];
+          bindm = [
+            "$mod, mouse:272, movewindow"
+            "$mod, mouse:273, resizewindow"
+          ];
+          env = [
+            "XCURSOR_THEME,Adwaita"
+            "XCURSOR_SIZE,24"
+          ];
         };
       };
 
