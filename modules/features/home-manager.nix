@@ -1,0 +1,145 @@
+{ self, inputs, ... }: {
+  flake.nixosModules.homeManager = { pkgs, lib, ... }:
+  let
+    myNoctalia = self.packages.${pkgs.stdenv.hostPlatform.system}.myNoctalia;
+  in {
+    imports = [ inputs.home-manager.nixosModules.home-manager ];
+    home-manager.useGlobalPkgs = true;
+    home-manager.useUserPackages = true;
+    home-manager.backupFileExtension = "backup";
+    home-manager.users.brandon = {
+      home.stateVersion = "25.11";
+      home.username = "brandon";
+      home.homeDirectory = "/home/brandon";
+
+      home.pointerCursor = {
+		gtk.enable = true;
+		package = pkgs.adwaita-icon-theme;
+		name = "Adwaita";
+		size = 24;
+      };
+
+      programs.git = {
+		enable = true;
+		settings = {
+			user = {
+				name = "Brandon";
+				email = "brandonmarella@gmail.com";
+			};
+			init.defaultBranch = "main";
+			pull.rebase = false;
+		};
+      };
+
+      wayland.windowManager.hyprland = {
+        enable = true;
+        settings = {
+          monitor = [
+            "DP-1,5120x1440@119.970,0x0,1"
+            "DP-2,1920x1080@60,5120x-480,1,transform,1"
+            "DP-3,1920x1080@60,-1080x-480,1,transform,3"
+            "HDMI-A-1,3840x2160@60,1280x-1440,1.5"
+          ];
+          exec-once = [
+            (lib.getExe pkgs.hyprlock)
+            (lib.getExe myNoctalia)
+          ];
+          input = {
+            kb_layout = "us,ua";
+            follow_mouse = 1;
+          };
+          general = {
+            gaps_in = 6;
+            gaps_out = 12;
+          };
+	  animations = {
+		enabled = true;
+		animation = [
+			"windows,1,2,default"
+			"border,1,2,default"
+			"fade,1,2,default"
+			"workspaces,1,2,default"
+		];
+	  };
+          "$mod" = "SUPER";
+          bind = [
+            "$mod, C, exec, ${lib.getExe pkgs.kitty}"
+            "$mod, Q, killactive"
+            "$mod, B, exec, ${lib.getExe pkgs.firefox}"
+            "$mod SHIFT, F, fullscreen, 0"
+            "$mod CTRL SHIFT, L, exec, ${lib.getExe pkgs.hyprlock}"
+            "$mod, Space, exec, ${lib.getExe myNoctalia} ipc call launcher toggle"
+            "$mod, H, movefocus, l"
+            "$mod SHIFT, H, movewindow, l"
+            "$mod, L, movefocus, r"
+            "$mod SHIFT, L, movewindow, r"
+            "$mod, Up, movefocus, u"
+            "$mod SHIFT, Up, movewindow, u"
+            "$mod, Down, movefocus, d"
+            "$mod SHIFT, Down, movewindow, d"
+            "$mod, 1, workspace, 1"
+            "$mod, 2, workspace, 2"
+            "$mod, 3, workspace, 3"
+            "$mod, 4, workspace, 4"
+            "$mod, 5, workspace, 5"
+            "$mod, 6, workspace, 6"
+            "$mod, 7, workspace, 7"
+            "$mod SHIFT, 1, movetoworkspace, 1"
+            "$mod SHIFT, 2, movetoworkspace, 2"
+            "$mod SHIFT, 3, movetoworkspace, 3"
+            "$mod SHIFT, 4, movetoworkspace, 4"
+            "$mod SHIFT, 5, movetoworkspace, 5"
+            "$mod SHIFT, 6, movetoworkspace, 6"
+            "$mod SHIFT, 7, movetoworkspace, 7"
+            "$mod, 8, focusmonitor, DP-3"
+            "$mod, 9, focusmonitor, HDMI-A-1"
+            "$mod, 0, focusmonitor, DP-2"
+            "$mod SHIFT, 8, movewindow, mon:DP-3"
+            "$mod SHIFT, 9, movewindow, mon:HDMI-A-1"
+            "$mod SHIFT, 0, movewindow, mon:DP-2"
+          ];
+	  bindm = [
+		"$mod, mouse:272, movewindow"
+		"$mod, mouse:273, resizewindow"
+	  ];
+	  env = [
+		"XCURSOR_THEME,Adwaita"
+		"XCURSOR_SIZE,24"
+	  ];
+        };
+      };
+
+      programs.bash = {
+		enable = true;
+		bashrcExtra = ''
+		    rebuild() {
+		      local host=''${1:-desktop}
+		      local extra_args=''${@:2}
+		      sudo nixos-rebuild switch --flake ~/nixos-config#$host $extra_args
+		    }
+		  '';
+      };
+
+      programs.hyprlock = {
+        enable = true;
+        settings = {
+          background = [{
+            monitor = "";
+            color = "rgba(0, 0, 0, 1.0)";
+          }];
+          input-field = [{
+            monitor = "DP-1";
+            size = "400, 60";
+            outline_thickness = 1;
+            outer_color = "rgb(255, 255, 255)";
+            inner_color = "rgb(0, 0, 0)";
+            font_color = "rgb(255, 255, 255)";
+            placeholder_text = "Password";
+            halign = "center";
+            valign = "center";
+          }];
+        };
+      };
+    };
+  };
+}
