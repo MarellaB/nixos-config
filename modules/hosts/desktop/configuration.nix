@@ -20,7 +20,7 @@
 	  # Setup Nix Garbage Collection for weekly runs (deletes older than 7 days)
 	  nix.gc = {
 	    automatic = true;
-	    dates = "weekly";
+	    dates = "daily";
 	    options = "--delete-older-than 7d";
 	  };
 
