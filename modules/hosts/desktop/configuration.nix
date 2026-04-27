@@ -106,15 +106,6 @@
 	  # Install firefox.
 	  programs.firefox.enable = true;
 
-/**
-	  programs.kitty = {
-		enable = true;
-		settings = {
-			term = "xterm-256color";
-		};
-	  };
-*/
-
 	  # Allow unfree packages
 	  nixpkgs.config.allowUnfree = true;
 
@@ -135,6 +126,11 @@
 			localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
 			gamescopeSession.enable = true; # Enables gamescope for steam games
 		};
+
+    fileSystems."/mnt/ssd" = {
+      device = "/dev/disk/by-uuid/e93fc391-fb97-4248-b2e8-d64fdfc96f5d";
+      fsType = "ext4";
+    };
 
 	  # DO NOT, change this value, unless you SPECIFICALLY know why.
 	  system.stateVersion = "25.11"; # Did you read the comment?
