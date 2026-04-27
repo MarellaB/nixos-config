@@ -17,6 +17,7 @@
         gcc
         playerctl
         lazygit
+        prismlauncher
         
         # LSPs
         lua-language-server
