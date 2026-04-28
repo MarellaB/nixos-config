@@ -150,6 +150,11 @@
             gaps_in = 6;
             gaps_out = 12;
           };
+          decoration = {
+            rounding = 8;
+            active_opacity = 1.0;
+            inactive_opacity = 0.9;
+          };
           workspace = [
             "1, monitor:DP-1"
             "2, monitor:DP-1"
