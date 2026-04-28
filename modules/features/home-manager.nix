@@ -90,6 +90,7 @@
 	  prefix = "C-Space";
 	  baseIndex = 1;
 	  terminal = "tmux-256color";
+    mouse = true;
 	  plugins = with pkgs.tmuxPlugins; [
 	    nord
 	    vim-tmux-navigator
@@ -180,7 +181,7 @@
             "$mod SHIFT, F, fullscreen, 0"
             "$mod, P, pseudo"
             "$mod, V, togglefloating"
-            "$mod CTRL SHIFT, S, exec, ${lib.getExe pkgs.hyprshot} -m region --clipboard-only"
+            "$mod CTRL SHIFT, 4, exec, ${lib.getExe pkgs.hyprshot} -m region --clipboard-only"
             "$mod CTRL SHIFT, L, exec, ${lib.getExe pkgs.hyprlock}"
             "$mod, Space, exec, ${lib.getExe myNoctalia} ipc call launcher toggle"
 
