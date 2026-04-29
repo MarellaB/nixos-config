@@ -11,6 +11,9 @@
 	  # Enables NVIDIA drivers and Configurations (Should be moved to Desktop Host when flaked)
 	  hardware.graphics.enable = true;
 	  services.xserver.videoDrivers = ["nvidia"];
+
+    services.flatpak.enable = true;
+
 	  hardware.nvidia = {
 	    modesetting.enable = true;
 	    open = true;
