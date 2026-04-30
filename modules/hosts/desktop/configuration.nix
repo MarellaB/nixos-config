@@ -6,6 +6,7 @@
 	    # self.nixosModules.niri # Commented out as just not sure how to work with this yet...
 	    self.nixosModules.hyprland
 	    self.nixosModules.homeManager
+      self.nixosModules.gaming
 	  ];
 
 	  # Enables NVIDIA drivers and Configurations (Should be moved to Desktop Host when flaked)
@@ -101,9 +102,6 @@
 	    isNormalUser = true;
 	    description = "brandon";
 	    extraGroups = [ "networkmanager" "wheel" ];
-	    packages = with pkgs; [
-	    #  thunderbird
-	    ];
 	  };
 
 	  # Install firefox.
@@ -116,19 +114,10 @@
 	  # $ nix search wget
 	  environment.systemPackages = with pkgs; [
 			git
-			discord
 			kitty
 			xwayland-satellite # X11 Compatability for Wayland
       claude-code
 	  ];
-
-		programs.steam = {
-	    enable = true;
-			remotePlay.openFirewall = true; #Open ports in the firewall for Steam Remote Play
-			dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server (when needed)
-			localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-			gamescopeSession.enable = true; # Enables gamescope for steam games
-		};
 
     fileSystems."/mnt/ssd" = {
       device = "/dev/disk/by-uuid/e93fc391-fb97-4248-b2e8-d64fdfc96f5d";

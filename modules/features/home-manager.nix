@@ -17,7 +17,6 @@
         gcc
         playerctl
         lazygit
-        prismlauncher
         hyprshot
         ripgrep
         fd
