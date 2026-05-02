@@ -14,20 +14,10 @@
       home.homeDirectory = "/home/brandon";
 
       home.packages = with pkgs; [
-        gcc
         playerctl
-        lazygit
         hyprshot
         ripgrep
         fd
-
-        # LSPs
-        lua-language-server
-        marksman
-        taplo
-        shfmt
-        hadolint
-        tree-sitter
       ];
 
       home.pointerCursor = {
@@ -35,18 +25,6 @@
         package = pkgs.adwaita-icon-theme;
         name = "Adwaita";
         size = 24;
-      };
-
-      programs.git = {
-        enable = true;
-        settings = {
-          user = {
-            name = "Brandon";
-            email = "brandonmarella@gmail.com";
-          };
-          init.defaultBranch = "main";
-          pull.rebase = false;
-        };
       };
 
       programs.kitty = {
@@ -68,21 +46,16 @@
         };
       };
 
-      programs.neovim = {
+      programs.bash = {
         enable = true;
-        defaultEditor = true;
-        vimAlias = true;
-        viAlias = true;
-        withRuby = false;
-        withPython3 = false;
+        bashrcExtra = ''
+          rebuild() {
+            local host=''${1:-desktop}
+            local extra_args=''${@:2}
+            sudo nixos-rebuild switch --flake ~/nixos-config#$host $extra_args
+          }
+        '';
       };
-
-      xdg.configFile."nvim" = {
-        source = ./nvim;
-        recursive = true;
-      };
-
-      xdg.configFile."nvim/lazy-lock.json".enable = false;
 
       programs.tmux = {
         enable = true;
@@ -245,16 +218,6 @@
         };
       };
 
-      programs.bash = {
-        enable = true;
-        bashrcExtra = ''
-          rebuild() {
-            local host=''${1:-desktop}
-            local extra_args=''${@:2}
-            sudo nixos-rebuild switch --flake ~/nixos-config#$host $extra_args
-          }
-        '';
-      };
 
       programs.hyprlock = {
         enable = true;
