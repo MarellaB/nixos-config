@@ -18,6 +18,8 @@
         hyprshot
         ripgrep
         fd
+
+        spotify
       ];
 
       home.pointerCursor = {
