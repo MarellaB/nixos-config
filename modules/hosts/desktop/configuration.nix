@@ -8,6 +8,7 @@
 	    self.nixosModules.homeManager
       self.nixosModules.gaming
       self.nixosModules.development
+      self.nixosModules.game-dev
 	  ];
 
 	  # Enables NVIDIA drivers and Configurations (Should be moved to Desktop Host when flaked)
