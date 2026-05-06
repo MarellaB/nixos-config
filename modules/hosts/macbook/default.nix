@@ -14,6 +14,7 @@
           home.homeDirectory = "/Users/brandon";
         };
       }
+			self.darwinModules.shell
       self.darwinModules.development
     ];
   };

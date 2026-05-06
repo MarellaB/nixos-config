@@ -53,22 +53,6 @@
         };
       };
 
-      programs.zsh = {
-        enable = true;
-        initExtra = ''
-          rebuild() {
-            local host=''${1:-desktop}
-            local extra_args=''${@:2}
-
-            if [[ "$(uname)" == "Darwin" ]]; then
-              darwin-rebuild switch --flake ~/nixos-config#macbook $extra_args
-            else
-              sudo nixos-rebuild switch --flake ~/nixos-config#$host $extra_args
-            fi
-          }
-        '';
-      };
-
       programs.tmux = {
         enable = true;
         prefix = "C-Space";
