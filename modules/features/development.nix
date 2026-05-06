@@ -1,15 +1,6 @@
 { self, inputs, ... }: {
   flake.nixosModules.development = { pkgs, ... }: {
 
-    programs.neovim = {
-      enable = true;
-      defaultEditor = true;
-      vimAlias = true;
-      viAlias = true;
-      withRuby = false;
-      withPython3 = false;
-    };
-
     home-manager.users.brandon = {
       home.packages = with pkgs; [
         gcc
@@ -22,6 +13,8 @@
         shfmt
         hadolint
         tree-sitter
+
+        self.packages.${pkgs.system}.neovim
       ];
 
       programs.git = {
@@ -35,12 +28,6 @@
           pull.rebase = false;
         };
       };
-
-      xdg.configFile."nvim" = {
-        source = ./nvim;
-        recursive = true;
-      };
-      xdg.configFile."nvim/lazy-lock.json".enable = false;
     };
 
   };

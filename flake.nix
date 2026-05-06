@@ -4,6 +4,7 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
+    nvf.url = "github:notashelf/nvf";
 
     wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
 

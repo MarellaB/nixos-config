@@ -20,6 +20,7 @@
         fd
 
         spotify
+				nerd-fonts.jetbrains-mono
       ];
 
       home.pointerCursor = {
@@ -32,6 +33,10 @@
       programs.kitty = {
         enable = true;
         themeFile = "Nord";
+				font = {
+					name = "JetBrainsMono Nerd Font";
+					size = 11;
+				};
       };
 
       programs.starship = {
