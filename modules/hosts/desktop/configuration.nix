@@ -104,10 +104,12 @@
 	    isNormalUser = true;
 	    description = "brandon";
 	    extraGroups = [ "networkmanager" "wheel" ];
+			shell = pkgs.zsh;
 	  };
 
 	  # Install firefox.
 	  programs.firefox.enable = true;
+		programs.zsh.enable = true;
 
 	  # Allow unfree packages
 	  nixpkgs.config.allowUnfree = true;

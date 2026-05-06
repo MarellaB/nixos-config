@@ -1,5 +1,7 @@
-{ self, inputs, ... }: {
-  flake.nixosModules.development = { pkgs, ... }: {
+{ self, inputs, ... }:
+
+let
+  devModule = { pkgs, ... }: {
 
     home-manager.users.brandon = {
       home.packages = with pkgs; [
@@ -31,4 +33,8 @@
     };
 
   };
+in {
+  flake.nixosModules.development = devModule;
+  flake.darwinModules.development = devModule;
 }
+

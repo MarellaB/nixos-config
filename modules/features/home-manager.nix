@@ -53,13 +53,18 @@
         };
       };
 
-      programs.bash = {
+      programs.zsh = {
         enable = true;
-        bashrcExtra = ''
+        initExtra = ''
           rebuild() {
             local host=''${1:-desktop}
             local extra_args=''${@:2}
-            sudo nixos-rebuild switch --flake ~/nixos-config#$host $extra_args
+
+            if [[ "$(uname)" == "Darwin" ]]; then
+              darwin-rebuild switch --flake ~/nixos-config#macbook $extra_args
+            else
+              sudo nixos-rebuild switch --flake ~/nixos-config#$host $extra_args
+            fi
           }
         '';
       };
