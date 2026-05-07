@@ -12,11 +12,11 @@
               expandtab = false;
             };
 						autocomplete.blink-cmp.enable = true;
-            theme = {
-							enable = true;
-							name = "catppuccin";
-							style = "frappe";
-						};
+						# Disable in built themes and use the imported nordic theme
+            theme.enable = false;
+						luaConfigPost = ''
+							vim.cmd.colorscheme("nordic");
+						'';
 						visuals = {
 							nvim-web-devicons.enable = true;
 							blink-indent.enable = true;
@@ -33,6 +33,8 @@
 							};
 						};
 						languages.nix.enable = true;
+
+						statusline.lualine.enable = true;
 
 #============================================== PLUGINS
 
@@ -97,6 +99,12 @@
 									smear_between_neighbor_lines = true;
 									cursor_color = "#d0d0d0";
 								};
+							};
+
+							"nordic.nvim" = {
+								package = pkgs.vimPlugins.nordic-nvim;
+								setupModule = "nordic";
+								# setupOpts = { ... };
 							};
 						};
 
