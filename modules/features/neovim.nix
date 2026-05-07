@@ -19,6 +19,7 @@
 						};
 						visuals = {
 							nvim-web-devicons.enable = true;
+							blink-indent.enable = true;
 						};
 						ui = {
 							smartcolumn.enable = true;
