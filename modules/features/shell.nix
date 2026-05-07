@@ -10,7 +10,7 @@ let
 
       programs.zsh = {
         enable = true;
-        initExtra = ''
+        initContent = ''
           rebuild() {
             local host=''${1:-desktop}
             local extra_args=''${@:2}
