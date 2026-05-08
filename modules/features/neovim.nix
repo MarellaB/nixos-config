@@ -11,15 +11,22 @@
               shiftwidth = 2;
               expandtab = false;
             };
+						git.enable = true;
 						autocomplete.blink-cmp.enable = true;
 						# Disable in built themes and use the imported nordic theme
             theme.enable = false;
 						luaConfigPost = ''
 							vim.cmd.colorscheme("nordic");
 						'';
+
 						visuals = {
 							nvim-web-devicons.enable = true;
-							blink-indent.enable = true;
+							blink-indent = {
+								enable = true;
+								setupOpts = {
+									scope.highlights = [ "BlinkIndentScope" ];
+								};
+							};
 						};
 						ui = {
 							smartcolumn.enable = true;
@@ -32,9 +39,24 @@
 								};
 							};
 						};
-						languages.nix.enable = true;
 
-						statusline.lualine.enable = true;
+						lsp.enable = true;
+						languages = {
+							nix.enable = true;
+
+							# Web LSPs
+							typescript.enable = true;
+							html.enable = true;
+							css.enable = true;
+							tailwind.enable = true;
+
+							# Scripting LSPs
+							lua.enable = true;
+							python.enable = true;
+
+							# Work LSPs
+							csharp.enable = true;
+						};
 
 #============================================== PLUGINS
 
@@ -55,6 +77,8 @@
 								};
 							};
 						};
+
+						statusline.lualine.enable = true;
 
             telescope = {
               enable = true;
