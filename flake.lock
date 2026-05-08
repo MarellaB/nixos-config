@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "bento-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769867259,
+        "narHash": "sha256-4HM0Ewx7AJFiprIPGriv+mY0l/BnRL/xHy1ROJtcTK0=",
+        "owner": "serhez",
+        "repo": "bento.nvim",
+        "rev": "aee8a542bc1839ff1764992ef2aa41c981d0bba4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "serhez",
+        "repo": "bento.nvim",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -235,6 +251,7 @@
     },
     "root": {
       "inputs": {
+        "bento-nvim": "bento-nvim",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "import-tree": "import-tree",

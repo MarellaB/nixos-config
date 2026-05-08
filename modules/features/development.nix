@@ -10,7 +10,7 @@ let
 				lazydocker
 				pnpm
         
-        self.packages.${pkgs.system}.neovim
+        self.packages.${pkgs.stdenv.hostPlatform.system}.neovim
       ];
 
       programs.git = {

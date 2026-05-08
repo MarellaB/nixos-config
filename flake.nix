@@ -17,6 +17,11 @@
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+		bento-nvim = {
+			url = "github:serhez/bento.nvim";
+			flake = false;
+		};
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);

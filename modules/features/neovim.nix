@@ -13,6 +13,9 @@
 							cursorline= true;
 							cursorlineopt = "both";
 							scrolloff = 8;
+							wrap = false;
+							autoindent = true;
+							smartindent = true;
             };
 						git.enable = true;
 						autocomplete.blink-cmp.enable = true;
@@ -146,6 +149,23 @@
 									highlight.timer = 100;
 								};
 							};
+
+							leetcode-nvim = {
+								enable = true;
+								setupOpts = {
+									lang = "typescript";
+								};
+							};
+
+							outline.aerial-nvim = {
+								enable = true;
+								mappings.toggle = "<leader>so";
+							};
+							
+							# Useful to learn more in depth motions, but distracting.
+							# motion.precognition.enable = true;
+
+							# Flash or Leap for faster jump navigation?
 						};
 
 
@@ -178,6 +198,16 @@
 						binds.whichKey = {
 							enable = true;
 							setupOpts.preset = "helix";
+						};
+
+						extraPlugins = {
+							bento-nvim = {
+								package = pkgs.vimUtils.buildVimPlugin {
+									name = "bento-nvim";
+									src = inputs.bento-nvim;
+								};
+								setup = "require('bento').setup {}";
+							};
 						};
 
 #============================================== KEYMAPS
