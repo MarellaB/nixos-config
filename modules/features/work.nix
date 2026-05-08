@@ -6,7 +6,10 @@ let
     home-manager.users.brandon = {
       home.packages = with pkgs; [
 				nodejs
-				dotnet-sdk
+				(with pkgs.dotnetCorePackages; combinePackages [
+					sdk_8_0
+					sdk_10_0
+				])
 				mongosh
       ];
     };

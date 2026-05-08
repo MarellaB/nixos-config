@@ -1,7 +1,16 @@
 { inputs, ... }: {
-  perSystem = { pkgs, ... }: {
+  perSystem = { pkgs, system, ... }:
+  let
+    patchedPkgs = if system == "aarch64-darwin"
+      then pkgs.extend (_: prev: {
+        csharp-ls = prev.csharp-ls.overrideAttrs (old: {
+          meta = old.meta // { badPlatforms = []; };
+        });
+      })
+      else pkgs;
+  in {
     packages.neovim = (inputs.nvf.lib.neovimConfiguration {
-      inherit pkgs;
+      pkgs = patchedPkgs;
       modules = [
         {
           config.vim = {
@@ -66,6 +75,7 @@
 						lsp.presets = {
 							tailwindcss-language-server.enable = true;
 						};
+						lsp.servers.nixd.settings.nil.nix.autoArchive = true;
 						languages = {
 							enableTreesitter = true;
 
@@ -74,6 +84,7 @@
 							toml.enable = true;
 							yaml.enable = true;
 							json.enable = true;
+							xml.enable = true;
 
 							# Web LSPs
 							typescript = {
