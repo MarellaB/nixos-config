@@ -31,7 +31,32 @@
 						# Disable in built themes and use the imported nordic theme
             theme.enable = false;
 						luaConfigPost = ''
-							vim.cmd.colorscheme("nordic");
+							vim.cmd.colorscheme("nordic")
+
+							vim.diagnostic.config({
+								virtual_text = false,
+								float = {
+									border = "double",
+									source = true,
+									header = "",
+									prefix = "",
+									title = " Diagnostics ",
+									title_pos = "center",
+								},
+							})
+
+							local function set_float_highlights()
+								local pmenu = vim.api.nvim_get_hl(0, { name = "Pmenu",    link = false })
+								local func  = vim.api.nvim_get_hl(0, { name = "Function", link = false })
+								local title = vim.api.nvim_get_hl(0, { name = "Title",    link = false })
+
+								vim.api.nvim_set_hl(0, "NormalFloat", { bg = pmenu.bg })
+								vim.api.nvim_set_hl(0, "FloatBorder", { fg = func.fg,  bg = pmenu.bg })
+								vim.api.nvim_set_hl(0, "FloatTitle",  { fg = title.fg, bg = pmenu.bg, bold = true })
+							end
+
+							vim.api.nvim_create_autocmd("ColorScheme", { callback = set_float_highlights })
+							set_float_highlights()
 						'';
 
 						visuals = {
@@ -203,6 +228,12 @@
 								package = pkgs.vimPlugins.nordic-nvim;
 								# setupModule = "nordic";
 								# setupOpts = { ... };
+							};
+
+							"tiny-inline-diagnostic.nvim" = {
+								package = pkgs.vimPlugins.tiny-inline-diagnostic-nvim;
+								setupModule = "tiny-inline-diagnostic";
+								setupOpts.preset = "classic";
 							};
 						};
 
