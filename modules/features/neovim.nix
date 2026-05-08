@@ -10,6 +10,9 @@
               tabstop = 2;
               shiftwidth = 2;
               expandtab = false;
+							cursorline= true;
+							cursorlineopt = "both";
+							scrolloff = 8;
             };
 						git.enable = true;
 						autocomplete.blink-cmp.enable = true;
@@ -27,9 +30,25 @@
 									scope.highlights = [ "BlinkIndentScope" ];
 								};
 							};
+							cinnamon-nvim.enable = true;
+							highlight-undo.enable = true;
+							nvim-cursorline = {
+								enable = true;
+								setupOpts = {
+									# cursorline.enable = true;
+									# cursorline.number = true;
+									cursorword.enable = true;
+								};
+							};
+
+							# FML Mode (Fun)
+							cellular-automaton.enable = true;
 						};
 						ui = {
-							smartcolumn.enable = true;
+							smartcolumn = {
+								enable = true;
+								setupOpts.colorcolumn = "80";
+							};
 							noice = {
 								enable = true;
 								setupOpts.presets = {
@@ -41,18 +60,31 @@
 						};
 
 						lsp.enable = true;
+						lsp.presets = {
+							tailwindcss-language-server.enable = true;
+						};
 						languages = {
+							enableTreesitter = true;
+
 							nix.enable = true;
+							markdown.enable = true;
+							toml.enable = true;
+							yaml.enable = true;
+							json.enable = true;
 
 							# Web LSPs
-							typescript.enable = true;
+							typescript = {
+								enable = true;
+								extensions.ts-error-translator.enable = true;
+							};
 							html.enable = true;
 							css.enable = true;
-							tailwind.enable = true;
+							svelte.enable = true;
 
 							# Scripting LSPs
 							lua.enable = true;
 							python.enable = true;
+							bash.enable = true;
 
 							# Work LSPs
 							csharp.enable = true;
@@ -96,15 +128,26 @@
 						};
 
 						# Replaces tmux-navigator
-						utility.smart-splits = {
-							enable = true;
-							keymaps = {
-								swap_buf_down = null;
-								swap_buf_left = null;
-								swap_buf_up = null;
-								swap_buf_right = null;
+						utility = {
+							smart-splits = {
+								enable = true;
+								keymaps = {
+									swap_buf_down = null;
+									swap_buf_left = null;
+									swap_buf_up = null;
+									swap_buf_right = null;
+								};
+							};
+
+							yanky-nvim = {
+								enable = true;
+								setupOpts = {
+									ring.storage = "memory";
+									highlight.timer = 100;
+								};
 							};
 						};
+
 
 						terminal.toggleterm = {
 							enable = true;
@@ -127,7 +170,7 @@
 
 							"nordic.nvim" = {
 								package = pkgs.vimPlugins.nordic-nvim;
-								setupModule = "nordic";
+								# setupModule = "nordic";
 								# setupOpts = { ... };
 							};
 						};

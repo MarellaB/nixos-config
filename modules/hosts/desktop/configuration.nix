@@ -1,4 +1,4 @@
-{ self, inputs, ... }: {
+{ self, ... }: {
 
   flake.nixosModules.desktopConfiguration = { config, pkgs, ... }: {
 	  imports = [ 
@@ -10,6 +10,8 @@
       self.nixosModules.development
       self.nixosModules.game-dev
 			self.nixosModules.shell
+			self.nixosModules.work
+			self.nixosModules.virtualisation
 	  ];
 
 	  # Enables NVIDIA drivers and Configurations (Should be moved to Desktop Host when flaked)

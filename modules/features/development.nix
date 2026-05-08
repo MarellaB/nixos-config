@@ -1,4 +1,4 @@
-{ self, inputs, ... }:
+{ self, ... }:
 
 let
   devModule = { pkgs, ... }: {
@@ -7,15 +7,9 @@ let
       home.packages = with pkgs; [
         gcc
         lazygit
+				lazydocker
+				pnpm
         
-        # LSPs
-        lua-language-server
-        marksman
-        taplo
-        shfmt
-        hadolint
-        tree-sitter
-
         self.packages.${pkgs.system}.neovim
       ];
 
