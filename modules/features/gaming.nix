@@ -1,4 +1,4 @@
-{ self, inputs, ... }: {
+{ ... }: {
   flake.nixosModules.gaming = { pkgs, ... }: {
     
 		programs.steam = {
@@ -12,7 +12,6 @@
     home-manager.users.brandon = {
       home.packages = with pkgs; [
         prismlauncher
-        discord
       ];
     };
 
