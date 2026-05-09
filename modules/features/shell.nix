@@ -85,6 +85,10 @@ let
       programs.kitty = {
         enable = true;
 				themeFile = "Nord";
+				settings = {
+					clipboard_control = "write-clipboard write-primary read-clipboard read-primary";
+					allow_hyperlinks = "yes";
+				};
 				font = {
 					name = "JetBrainsMono Nerd Font";
 					size = 12;
