@@ -5,6 +5,7 @@ let
 
     home-manager.users.brandon = {
 			home.packages = with pkgs; [
+				fastfetch
 				nerd-fonts.jetbrains-mono
 			];
 

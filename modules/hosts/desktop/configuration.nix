@@ -123,6 +123,7 @@
 			git
 			kitty
 			xwayland-satellite # X11 Compatability for Wayland
+			opencode
       claude-code
 	  ];
 
