@@ -33,6 +33,8 @@
 						luaConfigPost = ''
 							vim.cmd.colorscheme("nordic")
 
+							require("autoclose").setup()
+
 							vim.diagnostic.config({
 								virtual_text = false,
 								float = {
@@ -233,8 +235,10 @@
 
 							"nordic.nvim" = {
 								package = pkgs.vimPlugins.nordic-nvim;
-								# setupModule = "nordic";
-								# setupOpts = { ... };
+							};
+
+							"autoclose.nvim" = {
+								package = pkgs.vimPlugins.autoclose-nvim;
 							};
 
 							"tiny-inline-diagnostic.nvim" = {
