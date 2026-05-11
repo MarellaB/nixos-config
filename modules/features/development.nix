@@ -9,6 +9,8 @@ let
         lazygit
 				lazydocker
 				pnpm
+				mongodb-compass
+				vi-mongo # TUI SQL Editor
         
         self.packages.${pkgs.stdenv.hostPlatform.system}.neovim
       ];
