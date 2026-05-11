@@ -204,7 +204,7 @@
 
 							outline.aerial-nvim = {
 								enable = true;
-								mappings.toggle = "<leader>so";
+								mappings.toggle = "<leader>o";
 							};
 							
 							# Useful to learn more in depth motions, but distracting.
