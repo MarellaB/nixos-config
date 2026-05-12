@@ -125,7 +125,7 @@
 								enable = true;
 								extensions.ts-error-translator.enable = true;
 							};
-							html.enable = true;
+							html.enable = false;
 							css.enable = true;
 							svelte.enable = true;
 
