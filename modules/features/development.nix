@@ -11,8 +11,6 @@ let
 				opencode
 				claude-code
 				pnpm
-				mongodb-compass
-				vi-mongo # TUI Mongo Editor
         
         self.packages.${pkgs.stdenv.hostPlatform.system}.neovim
       ];

@@ -1,4 +1,4 @@
-{ self, ... }:
+{ ... }:
 
 let
   workModule = { pkgs, ... }: {
@@ -11,6 +11,8 @@ let
 					sdk_10_0
 				])
 				mongosh
+				mongodb-compass
+				vi-mongo # TUI Mongo Editor
       ];
     };
 
