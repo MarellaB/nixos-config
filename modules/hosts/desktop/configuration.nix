@@ -14,7 +14,7 @@
 			self.nixosModules.virtualisation
 	  ];
 
-	  # Enables NVIDIA drivers and Configurations (Should be moved to Desktop Host when flaked)
+	  # Enables NVIDIA drivers and Configurations
 	  hardware.graphics.enable = true;
 	  services.xserver.videoDrivers = ["nvidia"];
 
@@ -46,18 +46,18 @@
 	  networking.networkmanager.enable = true;
 
     services.greetd = {
-	  enable = true;
-	  settings = {
-	    default_session = {
-	      command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland";
-	      user = "greeter";
-	    };
-	    initial_session = {
-		command = "start-hyprland";
-		user = "brandon";
-	    };
-	  };
-	};
+			enable = true;
+			settings = {
+				default_session = {
+					command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland";
+					user = "greeter";
+				};
+				initial_session = {
+					command = "start-hyprland";
+					user = "brandon";
+				};
+			};
+		};
 
 
 	  time.timeZone = "America/New_York";
@@ -74,18 +74,15 @@
 	    LC_TIME = "en_US.UTF-8";
 	  };
 
-	  # Enable the X11 windowing system.
-	  services.xserver.enable = true;
-
-	  # Enable the GNOME Desktop Environment.
-	  # services.xserver.displayManager.gdm.enable = true;
-	  # services.xserver.desktopManager.gnome.enable = true;
-
-	  # Configure keymap in X11
-	  services.xserver.xkb = {
-	    layout = "us";
-	    variant = "";
-	  };
+	  # Enable the X11 windowing system
+	  # And configure keymap in X11
+	  services.xserver = {
+			enable = true;
+			xkb = {
+				layout = "us";
+				variant = "";
+			};
+		};
 
 	  # Enable CUPS to print documents.
 	  services.printing.enable = true;
