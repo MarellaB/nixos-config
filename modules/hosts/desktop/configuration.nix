@@ -122,6 +122,7 @@
 			xwayland-satellite # X11 Compatability for Wayland
 	  ];
 
+		# Mounts secondary SSD
     fileSystems."/mnt/ssd" = {
       device = "/dev/disk/by-uuid/e93fc391-fb97-4248-b2e8-d64fdfc96f5d";
       fsType = "ext4";
