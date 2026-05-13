@@ -1,4 +1,4 @@
-{ self, inputs, ... }: {
+{ ... }: {
   flake.nixosModules.game-dev = { pkgs, ... }: {
 
     home-manager.users.brandon = {
@@ -6,6 +6,7 @@
         blender
         godot
         inkscape
+				itch
       ];
     };
 
