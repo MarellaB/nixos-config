@@ -11,7 +11,7 @@
 
     home-manager.users.brandon = {
       home.packages = with pkgs; [
-        prismlauncher
+        prismlauncher # Wesley's Secret Minecraft Launcher
       ];
     };
 
