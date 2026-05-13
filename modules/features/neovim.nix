@@ -297,6 +297,15 @@
 								silent = true;
 								action = ">gv";
 							}
+
+							# Clear Search Results
+							{
+								key = "<leader>ll";
+								mode = "n";
+								silent = true;
+								action = "<cmd>nohlsearch<cr>";
+								desc = "Clear Search highlights";
+							}
 						];
 
 #============================================== AUTO-COMMANDS
