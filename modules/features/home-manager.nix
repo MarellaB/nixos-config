@@ -16,8 +16,6 @@
       home.packages = with pkgs; [
         playerctl
         hyprshot
-        ripgrep
-        fd
 
         spotify
       ];
@@ -46,6 +44,8 @@
           input = {
             kb_layout = "us,ua";
             follow_mouse = 1;
+						repeat_rate = 70;
+						repeat_delay = 250;
           };
           general = {
             gaps_in = 6;

@@ -7,6 +7,8 @@ let
 			home.packages = with pkgs; [
 				fastfetch
 				nerd-fonts.jetbrains-mono
+        fd
+        ripgrep
 			];
 
       programs.zsh = {
@@ -52,6 +54,7 @@ let
         extraConfig = ''
           bind-key P display-popup -w 80% -h 80% -E
           set -g pane-border-lines double
+
           bind -r Left resize-pane -L 10
           bind -r Right resize-pane -R 10
           bind -r Up resize-pane -U 10
