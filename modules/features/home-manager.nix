@@ -1,7 +1,8 @@
 { self, inputs, ... }: {
-  flake.nixosModules.homeManager = { pkgs, lib, ... }:
+  flake.nixosModules.homeManager = { pkgs, lib, config, ... }:
   let
     myNoctalia = self.packages.${pkgs.stdenv.hostPlatform.system}.myNoctalia;
+		isDesktop = config.networking.hostName == "brandons-nixos-desktop";
   in {
     imports = [ inputs.home-manager.nixosModules.home-manager ];
     home-manager.useGlobalPkgs = true;
@@ -31,12 +32,14 @@
       wayland.windowManager.hyprland = {
         enable = true;
         settings = {
-          monitor = [
+          monitor = if isDesktop then [
             "DP-1,5120x1440@119.970,0x0,1"
             "DP-2,1920x1080@60,5120x-480,1,transform,1"
             "DP-3,1920x1080@60,-1080x-480,1,transform,3"
             "HDMI-A-1,3840x2160@60,1280x-1440,1.5"
-          ];
+          ] else [
+						"eDP-1,1920x1080@60,0x0,1"
+					];
           exec-once = [
             (lib.getExe pkgs.hyprlock)
             (lib.getExe myNoctalia)
@@ -56,7 +59,7 @@
             active_opacity = 1.0;
             inactive_opacity = 0.9;
           };
-          workspace = [
+          workspace = if isDesktop then [
             "1, monitor:DP-1"
             "2, monitor:DP-1"
             "3, monitor:DP-1"
@@ -68,7 +71,7 @@
             "8, monitor:DP-3"
             "9, monitor:HDMI-A-1"
             "10, monitor:DP-2"
-          ];
+          ] else [ ];
           animations = {
             enabled = true;
             animation = [
@@ -81,9 +84,10 @@
           "$mod" = "SUPER";
           bind = [
             "$mod, C, exec, ${lib.getExe pkgs.kitty}"
-            "$mod, Q, killactive"
-            "$mod SHIFT, Q, forcekillactive"
             "$mod, B, exec, ${lib.getExe pkgs.firefox}"
+            
+						"$mod, Q, killactive"
+            "$mod SHIFT, Q, forcekillactive"
             "$mod SHIFT, F, fullscreen, 0"
             "$mod, P, pseudo"
             "$mod, V, togglefloating"

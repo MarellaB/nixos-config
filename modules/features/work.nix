@@ -13,6 +13,7 @@ let
 				mongosh
 				mongodb-compass
 				vi-mongo # TUI Mongo Editor
+				teams-for-linux
       ];
     };
 
