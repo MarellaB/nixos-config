@@ -31,9 +31,8 @@
 						# Disable in built themes and use the imported nordic theme
             theme.enable = false;
 						luaConfigPost = ''
-							vim.cmd.colorscheme("nordic")
-
 							require("autoclose").setup()
+							vim.cmd.colorscheme("nordic")
 
 							vim.diagnostic.config({
 								virtual_text = false,
@@ -110,6 +109,7 @@
 							tailwindcss-language-server.enable = true;
 						};
 						lsp.servers.nixd.settings.nil.nix.autoArchive = true;
+							# treesitter.grammars = [ pkgs.vimPlugins.nvim-treesitter.allGrammars ];
 						languages = {
 							enableTreesitter = true;
 
@@ -125,7 +125,10 @@
 								enable = true;
 								extensions.ts-error-translator.enable = true;
 							};
-							html.enable = false;
+							html = {
+								enable = true;
+								lsp.enable = false;
+							};
 							css.enable = true;
 							svelte.enable = true;
 
