@@ -17,8 +17,8 @@
       home.packages = with pkgs; [
         playerctl
         hyprshot
-
         spotify
+				logseq
       ];
 
       home.pointerCursor = {
