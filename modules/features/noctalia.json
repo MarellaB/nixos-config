@@ -121,6 +121,10 @@
       {
         "enabled": false,
         "name": "DP-1"
+      },
+      {
+        "enabled": false,
+        "name": "eDP-1"
       }
     ]
   },
@@ -508,7 +512,8 @@
     "enableMarkdown": false,
     "density": "default",
     "monitors": [
-      "DP-1"
+      "DP-1",
+			"eDP-1"
     ],
     "location": "top_right",
     "overlayLayer": true,
@@ -549,7 +554,8 @@
       3
     ],
     "monitors": [
-      "DP-1"
+      "DP-1",
+      "eDP-1"
     ]
   },
   "audio": {
