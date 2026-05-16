@@ -11,6 +11,7 @@ let
 				opencode
 				claude-code
 				pnpm
+				emacs
         
         self.packages.${pkgs.stdenv.hostPlatform.system}.neovim
       ];
