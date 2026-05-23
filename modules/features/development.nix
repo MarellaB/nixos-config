@@ -11,10 +11,17 @@ let
 				opencode
 				claude-code
 				pnpm
-				emacs
+        gnumake
+        cmake
         
         self.packages.${pkgs.stdenv.hostPlatform.system}.neovim
+        libvterm-neovim
       ];
+
+			programs.emacs = {
+				enable = true;
+				package = pkgs.emacs30-pgtk;
+			};
 
       programs.git = {
         enable = true;
