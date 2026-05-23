@@ -85,6 +85,7 @@
           bind = [
             "$mod, C, exec, ${lib.getExe pkgs.kitty}"
             "$mod, B, exec, ${lib.getExe pkgs.firefox}"
+            "$mod, E, exec, ${lib.getExe pkgs.emacs}"
             
 						"$mod, Q, killactive"
             "$mod SHIFT, Q, forcekillactive"
