@@ -66,7 +66,7 @@ let
       programs.ssh = {
         enable = true;
         enableDefaultConfig = false; # This is deprecated, so setting to false now to get ahead
-        matchBlocks = {
+        settings = {
           "github.com" = {
             identityFile = "~/.ssh/id_ed25519";
             user = "git";
