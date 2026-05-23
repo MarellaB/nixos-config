@@ -26,10 +26,10 @@ let
         tailwindcss-language-server
       ];
 
-			programs.emacs = {
-				enable = true;
-				package = pkgs.emacs30-pgtk;
-      };
+        programs.emacs = {
+            enable = true;
+            package = pkgs.emacs30-pgtk;
+        };
 
       programs.git = {
         enable = true;
