@@ -2,7 +2,7 @@
   flake.nixosModules.homeManager = { pkgs, lib, config, ... }:
   let
     myNoctalia = self.packages.${pkgs.stdenv.hostPlatform.system}.myNoctalia;
-		isDesktop = config.networking.hostName == "brandons-nixos-desktop";
+    isDesktop = config.networking.hostName == "brandons-nixos-desktop";
   in {
     imports = [ inputs.home-manager.nixosModules.home-manager ];
     home-manager.useGlobalPkgs = true;
@@ -18,7 +18,8 @@
         playerctl
         hyprshot
         spotify
-				logseq
+        logseq
+        localsend
       ];
 
       home.pointerCursor = {
