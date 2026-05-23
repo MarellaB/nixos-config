@@ -13,15 +13,23 @@ let
 				pnpm
         gnumake
         cmake
+
+        rustc
+        cargo
         
         self.packages.${pkgs.stdenv.hostPlatform.system}.neovim
         libvterm-neovim
+
+        typescript-language-server
+        svelte-language-server
+        typescript
+        tailwindcss-language-server
       ];
 
 			programs.emacs = {
 				enable = true;
 				package = pkgs.emacs30-pgtk;
-			};
+      };
 
       programs.git = {
         enable = true;
