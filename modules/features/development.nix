@@ -7,16 +7,16 @@ let
       home.packages = with pkgs; [
         gcc
         lazygit
-				lazydocker
-				opencode
-				claude-code
-				pnpm
+        lazydocker
+        opencode
+        claude-code
+        pnpm
         gnumake
         cmake
 
         rustc
         cargo
-        
+
         self.packages.${pkgs.stdenv.hostPlatform.system}.neovim
         libvterm-neovim
 
@@ -26,10 +26,10 @@ let
         tailwindcss-language-server
       ];
 
-        programs.emacs = {
-            enable = true;
-            package = pkgs.emacs30-pgtk;
-        };
+      programs.emacs = {
+        enable = true;
+        package = pkgs.emacs30-pgtk;
+      };
 
       programs.git = {
         enable = true;

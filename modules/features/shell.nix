@@ -4,12 +4,12 @@ let
   shellModule = { pkgs, ... }: {
 
     home-manager.users.brandon = {
-			home.packages = with pkgs; [
-				fastfetch
-				nerd-fonts.jetbrains-mono
+      home.packages = with pkgs; [
+        fastfetch
+        nerd-fonts.jetbrains-mono
         fd
         ripgrep
-			];
+      ];
 
       programs.zsh = {
         enable = true;
@@ -88,15 +88,15 @@ let
 
       programs.kitty = {
         enable = true;
-				themeFile = "Nord";
-				settings = {
-					clipboard_control = "write-clipboard write-primary read-clipboard read-primary";
-					allow_hyperlinks = "yes";
-				};
-				font = {
-					name = "JetBrainsMono Nerd Font";
-					size = 12;
-				};
+        themeFile = "Nord";
+        settings = {
+          clipboard_control = "write-clipboard write-primary read-clipboard read-primary";
+          allow_hyperlinks = "yes";
+        };
+        font = {
+          name = "JetBrainsMono Nerd Font";
+          size = 12;
+        };
       };
     };
   };
