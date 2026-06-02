@@ -13,6 +13,10 @@
 
     system.stateVersion = 5;
 
+    config._module.args = {
+      syncthingName = "macbook";
+    };
+
     # Let Determinate Systems manage this
     nix.enable = false;
   };

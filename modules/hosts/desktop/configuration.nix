@@ -12,7 +12,12 @@
       self.nixosModules.shell
       self.nixosModules.work
       self.nixosModules.virtualisation
+      self.nixosModules.syncthing
     ];
+
+    config._module.args = {
+      syncthingName = "desktop";
+    };
 
     # Enables NVIDIA drivers and Configurations
     hardware.graphics.enable = true;
