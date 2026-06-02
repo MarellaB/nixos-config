@@ -11,15 +11,24 @@
       self.nixosModules.work
     ];
 
-    # Enables NVIDIA drivers and Configurations
-    hardware.graphics.enable = true;
-    services.xserver.videoDrivers = ["nvidia"];
+		hardware.graphics = {
+			enable = true;
+			enable32Bit = true;
+		};
 
-    hardware.nvidia = {
-      modesetting.enable = true;
-      open = true;
-      nvidiaSettings = true;
-    };
+		hardware.graphics.extraPackages = with pkgs; [
+			intel-media-driver
+			vpl-gpu-rt
+		];
+
+		hardware.bluetooth = {
+			enable = true;
+			powerOnBoot = true;
+		};
+
+		powerManagement.enable = true;
+		services.power-profiles-daemon.enable = true;
+		services.upower.enable = true;
 
     # Setup Nix Garbage Collection for weekly runs (deletes older than 7 days)
     nix.gc = {
