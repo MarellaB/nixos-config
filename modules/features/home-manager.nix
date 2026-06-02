@@ -3,6 +3,7 @@
     let
       myNoctalia = self.packages.${pkgs.stdenv.hostPlatform.system}.myNoctalia;
       isDesktop = config.networking.hostName == "brandons-nixos-desktop";
+      isWorkLaptop = config.networking.hostName == "brandon-marellas-work-laptop";
     in {
       imports = [ inputs.home-manager.nixosModules.home-manager ];
       home-manager.useGlobalPkgs = true;
@@ -39,7 +40,7 @@
               "DP-3,1920x1080@60,-1080x-480,1,transform,3"
               "HDMI-A-1,3840x2160@60,1280x-1440,1.5"
             ] else [
-              "eDP-1,1920x1080@60,0x0,1"
+              "eDP-1,1920x1200@60,0x0,1"
             ];
             exec-once = [
               (lib.getExe pkgs.hyprlock)
@@ -72,7 +73,20 @@
               "8, monitor:DP-3"
               "9, monitor:HDMI-A-1"
               "10, monitor:DP-2"
-            ] else [ ];
+            ] else if isWorkLaptop then [
+              "1, monitor:DP-3"
+              "2, monitor:DP-3"
+              "3, monitor:DP-3"
+              "4, monitor:DP-3"
+              "5, monitor:DP-3"
+              "6, monitor:DP-3"
+              "7, monitor:DP-3"
+              "8, monitor:DP-3"
+              "9, monitor:DP-3"
+
+              "10, monitor:DP-4"
+
+						] else [ ];
             animations = {
               enabled = true;
               animation = [
@@ -141,6 +155,8 @@
               ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
               ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
               ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+							", switch:Lid Switch, exec, hyprctl keyword monitor 'eDP-1, preferred, auto, 1'"
+							", switch:on:Lid Switch, exec, hyprctl monitors | grep -q -v 'eDP-1' && hyprctl keyword monitor 'eDP-1, disable' || systemctl suspend"
             ];
             bindm = [
               "$mod, mouse:272, movewindow"
@@ -150,6 +166,13 @@
               "XCURSOR_THEME,Adwaita"
               "XCURSOR_SIZE,24"
             ];
+						device = [
+							{
+								name = "logitech-mx-master-4";
+								# Invert horizontal scrolling
+								scroll_points = "1 0 0 -1";
+							}
+						];
           };
         };
 
@@ -171,7 +194,30 @@
               placeholder_text = "Password";
               halign = "center";
               valign = "center";
-            }];
+            }
+						{
+              monitor = "eDP-1";
+              size = "400, 60";
+              outline_thickness = 1;
+              outer_color = "rgb(255, 255, 255)";
+              inner_color = "rgb(0, 0, 0)";
+              font_color = "rgb(255, 255, 255)";
+              placeholder_text = "Password";
+              halign = "center";
+              valign = "center";
+            }
+						{
+              monitor = "DP-3";
+              size = "400, 60";
+              outline_thickness = 1;
+              outer_color = "rgb(255, 255, 255)";
+              inner_color = "rgb(0, 0, 0)";
+              font_color = "rgb(255, 255, 255)";
+              placeholder_text = "Password";
+              halign = "center";
+              valign = "center";
+            }
+						];
           };
         };
       };
