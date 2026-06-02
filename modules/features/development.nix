@@ -1,7 +1,11 @@
 { self, ... }:
 
 let
-  devModule = { pkgs, ... }: {
+  devModule = { pkgs, config, ... }:
+  let
+			isDesktop = config.networking.hostName == "brandons-nixos-desktop";
+      isWorkLaptop = config.networking.hostName == "brandon-marellas-work-laptop";
+  in {
 
     home-manager.users.brandon = {
       home.packages = with pkgs; [
@@ -33,15 +37,18 @@ let
 
       programs.git = {
         enable = true;
+
         settings = {
-          user = {
-            name = "Brandon";
-            email = "brandonmarella@gmail.com";
-          };
           init.defaultBranch = "main";
           pull.rebase = false;
+					core.autocrlf = isWorkLaptop;
+					user = {
+						name = if isDesktop then "Brandon" else "Brandon Marella";
+						email = if isDesktop then "brandonmarella@gmail.com" else "bmarella@dolbey.com";
+					};
         };
       };
+
     };
 
   };
