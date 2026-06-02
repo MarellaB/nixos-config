@@ -9,7 +9,12 @@
       self.nixosModules.development
       self.nixosModules.virtualisation
       self.nixosModules.work
+			self.nixosModules.syncthing
     ];
+
+    _module.args = {
+      syncthingName = "workLaptop";
+    };
 
 		hardware.graphics = {
 			enable = true;
