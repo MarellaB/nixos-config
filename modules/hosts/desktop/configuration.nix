@@ -15,7 +15,7 @@
       self.nixosModules.syncthing
     ];
 
-    config._module.args = {
+    _module.args = {
       syncthingName = "desktop";
     };
 

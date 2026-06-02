@@ -86,7 +86,7 @@
 
               "10, monitor:DP-4"
 
-						] else [ ];
+            ] else [ ];
             animations = {
               enabled = true;
               animation = [
@@ -155,8 +155,8 @@
               ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
               ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
               ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-							", switch:Lid Switch, exec, hyprctl keyword monitor 'eDP-1, preferred, auto, 1'"
-							", switch:on:Lid Switch, exec, hyprctl monitors | grep -q -v 'eDP-1' && hyprctl keyword monitor 'eDP-1, disable' || systemctl suspend"
+              ", switch:Lid Switch, exec, hyprctl keyword monitor 'eDP-1, preferred, auto, 1'"
+              ", switch:on:Lid Switch, exec, hyprctl monitors | grep -q -v 'eDP-1' && hyprctl keyword monitor 'eDP-1, disable' || systemctl suspend"
             ];
             bindm = [
               "$mod, mouse:272, movewindow"
@@ -166,13 +166,13 @@
               "XCURSOR_THEME,Adwaita"
               "XCURSOR_SIZE,24"
             ];
-						device = [
-							{
-								name = "logitech-mx-master-4";
-								# Invert horizontal scrolling
-								scroll_points = "1 0 0 -1";
-							}
-						];
+            device = [
+              {
+                name = "logitech-mx-master-4";
+                # Invert horizontal scrolling
+                scroll_points = "1 0 0 -1";
+              }
+            ];
           };
         };
 
@@ -184,40 +184,41 @@
               monitor = "";
               color = "rgba(0, 0, 0, 1.0)";
             }];
-            input-field = [{
-              monitor = "DP-1";
-              size = "400, 60";
-              outline_thickness = 1;
-              outer_color = "rgb(255, 255, 255)";
-              inner_color = "rgb(0, 0, 0)";
-              font_color = "rgb(255, 255, 255)";
-              placeholder_text = "Password";
-              halign = "center";
-              valign = "center";
-            }
-						{
-              monitor = "eDP-1";
-              size = "400, 60";
-              outline_thickness = 1;
-              outer_color = "rgb(255, 255, 255)";
-              inner_color = "rgb(0, 0, 0)";
-              font_color = "rgb(255, 255, 255)";
-              placeholder_text = "Password";
-              halign = "center";
-              valign = "center";
-            }
-						{
-              monitor = "DP-3";
-              size = "400, 60";
-              outline_thickness = 1;
-              outer_color = "rgb(255, 255, 255)";
-              inner_color = "rgb(0, 0, 0)";
-              font_color = "rgb(255, 255, 255)";
-              placeholder_text = "Password";
-              halign = "center";
-              valign = "center";
-            }
-						];
+            input-field = [
+              {
+                monitor = "DP-1";
+                size = "400, 60";
+                outline_thickness = 1;
+                outer_color = "rgb(255, 255, 255)";
+                inner_color = "rgb(0, 0, 0)";
+                font_color = "rgb(255, 255, 255)";
+                placeholder_text = "Password";
+                halign = "center";
+                valign = "center";
+              }
+              {
+                monitor = "eDP-1";
+                size = "400, 60";
+                outline_thickness = 1;
+                outer_color = "rgb(255, 255, 255)";
+                inner_color = "rgb(0, 0, 0)";
+                font_color = "rgb(255, 255, 255)";
+                placeholder_text = "Password";
+                halign = "center";
+                valign = "center";
+              }
+              {
+                monitor = "DP-3";
+                size = "400, 60";
+                outline_thickness = 1;
+                outer_color = "rgb(255, 255, 255)";
+                inner_color = "rgb(0, 0, 0)";
+                font_color = "rgb(255, 255, 255)";
+                placeholder_text = "Password";
+                halign = "center";
+                valign = "center";
+              }
+            ];
           };
         };
       };
