@@ -5,7 +5,8 @@
     "position": "top",
     "monitors": [
       "DP-1",
-			"eDP-1"
+      "DP-3",
+      "eDP-1"
     ],
     "density": "default",
     "showOutline": false,
@@ -74,11 +75,11 @@
         {
           "deviceNativePath": "__default__",
           "displayMode": "graphic-clean",
-          "hideIfIdle": false,
+          "hideIfIdle": true,
           "hideIfNotDetected": true,
           "id": "Battery",
-          "showNoctaliaPerformance": false,
-          "showPowerProfiles": false
+          "showNoctaliaPerformance": true,
+          "showPowerProfiles": true
         },
         {
           "clockColor": "none",
@@ -513,7 +514,7 @@
     "density": "default",
     "monitors": [
       "DP-1",
-			"eDP-1"
+      "eDP-1"
     ],
     "location": "top_right",
     "overlayLayer": true,
