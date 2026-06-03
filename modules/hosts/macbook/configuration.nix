@@ -13,7 +13,7 @@
 
     system.stateVersion = 5;
 
-    config._module.args = {
+    _module.args = {
       syncthingName = "macbook";
     };
 
