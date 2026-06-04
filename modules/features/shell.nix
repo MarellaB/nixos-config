@@ -15,14 +15,14 @@ let
         enable = true;
         initContent = ''
           rebuild() {
-            local host=''${1:-desktop}
-            local extra_args=''${@:2}
+          local host=''${1:-desktop}
+          local extra_args=''${@:2}
 
-            if [[ "$(uname)" == "Darwin" ]]; then
-              sudo darwin-rebuild switch --flake ~/nixos-config#macbook $extra_args
-            else
-              sudo nixos-rebuild switch --flake ~/nixos-config#$host $extra_args
-            fi
+          if [[ "$(uname)" == "Darwin" ]]; then
+          sudo darwin-rebuild switch --flake ~/nixos-config#macbook $extra_args
+          else
+          sudo nixos-rebuild switch --flake ~/nixos-config#$host $extra_args
+          fi
           }
         '';
       };
@@ -31,9 +31,12 @@ let
         enable = true;
         settings = {
           add_newline = true;
-          format = "[ ](bg:#3b4252 fg:#2e3440)[ ](bg:#434c5e fg:#3b4252)[ ](bg:#88c0d0 fg:#434c5e)[󱄅 ](bg:#88c0d0 fg:#434c5e)[ ](bg:#81a1c1 fg:#88c0d0)[$directory](bg:#81a1c1 fg:#000000)[ ](bg:#81a1c1 fg:#81a1c1)[ ](fg:#81a1c1)\n";
+
+          # Monochromatic, high-contrast prompt layout
+          format = "[ ](bg:#282a2e fg:#1d1f21)[ ](bg:#373b41 fg:#282a2e)[ ](bg:#c5c8c6 fg:#373b41)[󱄅 ](bg:#c5c8c6 fg:#1d1f21)[ ](bg:#282a2e fg:#c5c8c6)[$directory](bg:#282a2e fg:#ffffff)[ ](bg:#282a2e fg:#282a2e)[ ](fg:#282a2e)\n";
+
           directory = {
-            style = "fg:#434c5e bg:#81a1c1";
+            style = "fg:#ffffff bg:#282a2e bold";
             format = "[ $path ]($style)";
             truncation_length = 3;
             truncation_symbol = ".../";
@@ -48,7 +51,6 @@ let
         terminal = "tmux-256color";
         mouse = true;
         plugins = with pkgs.tmuxPlugins; [
-          nord
           vim-tmux-navigator
         ];
         extraConfig = ''
@@ -60,6 +62,24 @@ let
           bind -r Up resize-pane -U 10
           bind -r Down resize-pane -D 10
           set -g repeat-time 700
+
+          # --- Tomorrow Night Colors ---
+          set -g status-style "bg=#282a2e,fg=#c5c8c6"
+          set -g pane-border-style "fg=#373b41"
+          set -g pane-active-border-style "fg=#81a2be"
+          set -g mode-style "bg=#373b41,fg=#c5c8c6"
+          set -g message-style "bg=#282a2e,fg=#c5c8c6"
+
+          # Inactive tabs: Subtle gray on dark background
+          set -g window-status-style "bg=#282a2e,fg=#969896"
+          set -g window-status-format " #I:#W "
+
+          # Active tab: High-contrast white/light-gray text on a slightly lighter charcoal block
+          set -g window-status-current-style "bg=#373b41,fg=#ffffff,bold"
+          set -g window-status-current-format " #I:#W* "
+
+          # Thin separator between tabs to keep it clean
+          set -g window-status-separator ""
         '';
       };
 
@@ -88,7 +108,7 @@ let
 
       programs.kitty = {
         enable = true;
-        themeFile = "Nord";
+        themeFile = "Tomorrow_Night";
         settings = {
           clipboard_control = "write-clipboard write-primary read-clipboard read-primary";
           allow_hyperlinks = "yes";
