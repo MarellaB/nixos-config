@@ -14,6 +14,9 @@
         home.stateVersion = "25.11";
         home.username = "brandon";
         home.homeDirectory = "/home/brandon";
+        home.sessionPath = [
+          "$HOME/.config/emacs/bin"
+        ];
 
         home.packages = with pkgs; [
           playerctl
