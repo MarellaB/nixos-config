@@ -32,16 +32,65 @@ let
         enable = true;
         settings = {
           add_newline = true;
+          format = ''
+            [ ](bg:#282a2e fg:#1d1f21)[ ](bg:#373b41 fg:#282a2e)[ ](bg:#c5c8c6 fg:#373b41)[󱄅 ](bg:#c5c8c6 fg:#1d1f21)[ ](bg:#282a2e fg:#c5c8c6)$directory$git_branch$git_status$nix_shell$golang$nodejs$rust$cmd_duration
+            $character'';
 
-          # Monochromatic, high-contrast prompt layout
-          format = "[ ](bg:#282a2e fg:#1d1f21)[ ](bg:#373b41 fg:#282a2e)[ ](bg:#c5c8c6 fg:#373b41)[󱄅 ](bg:#c5c8c6 fg:#1d1f21)[ ](bg:#282a2e fg:#c5c8c6)[$directory](bg:#282a2e fg:#ffffff)[ ](bg:#282a2e fg:#282a2e)[ ](fg:#282a2e)\n";
+            directory = {
+              style = "fg:#ffffff bg:#282a2e bold";
+              format = "[$path ]($style)[](fg:#282a2e)";
+              truncation_length = 3;
+              truncation_symbol = ".../";
+            };
 
-          directory = {
-            style = "fg:#ffffff bg:#282a2e bold";
-            format = "[ $path ]($style)";
-            truncation_length = 3;
-            truncation_symbol = ".../";
-          };
+            git_branch = {
+              style = "fg:#c5c8c6 bold";
+              format = "[  $branch]($style)";
+            };
+
+            # Git Status: Strictly ahead/behind. No other tracking keys defined so they can't render.
+            git_status = {
+              style = "fg:#de935f bold";
+              format = "[ $ahead_behind]($style)"; # Sits tight next to the branch text
+              ahead = "Ahead";
+              behind = "Behind";
+            };
+
+            # LANGUAGE AND SYSTEM MODULES
+            nix_shell = {
+              style = "fg:#c5c8c6 bold";
+              symbol = " ";
+              format = "[  $symbol$name]($style)";
+            };
+
+            golang = {
+              style = "fg:#c5c8c6 bold";
+              symbol = " ";
+              format = "[  $symbol$version]($style)";
+            };
+
+            nodejs = {
+              style = "fg:#c5c8c6 bold";
+              symbol = " ";
+              format = "[  $symbol$version]($style)";
+            };
+
+            rust = {
+              style = "fg:#c5c8c6 bold";
+              symbol = " ";
+              format = "[  $symbol$version]($style)";
+            };
+
+            cmd_duration = {
+              min_time = 2000;
+              style = "fg:#969896";
+              format = "[  󱎫 $duration]($style)";
+            };
+
+            character = {
+              success_symbol = "[❯](fg:#ffffff bold)";
+              error_symbol = "[❯](fg:#cc6666 bold)";
+            };
         };
       };
 
