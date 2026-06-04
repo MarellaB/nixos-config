@@ -9,6 +9,7 @@ let
         nerd-fonts.jetbrains-mono
         fd
         ripgrep
+        btop
       ];
 
       programs.zsh = {
