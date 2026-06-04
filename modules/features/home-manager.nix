@@ -55,9 +55,11 @@
             general = {
               gaps_in = 6;
               gaps_out = 12;
+              "col.active_border" = "rgba(DDDDDDAA)";
+              "col.inactive_border" = "rgba(DDDDDD33)";
             };
             decoration = {
-              rounding = 8;
+              rounding = 6;
               active_opacity = 1.0;
               inactive_opacity = 0.9;
             };
