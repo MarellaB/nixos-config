@@ -249,7 +249,7 @@
     "viewMode": "single",
     "setWallpaperOnAllMonitors": true,
     "linkLightAndDarkWallpapers": true,
-    "fillMode": "crop",
+    "fillMode": "center",
     "fillColor": "#000000",
     "useSolidColor": false,
     "solidColor": "#1a1a2e",
@@ -578,7 +578,7 @@
   },
   "colorSchemes": {
     "useWallpaperColors": false,
-    "predefinedScheme": "Nord",
+    "predefinedScheme": "Monochrome",
     "darkMode": true,
     "schedulingMode": "off",
     "manualSunrise": "06:30",
