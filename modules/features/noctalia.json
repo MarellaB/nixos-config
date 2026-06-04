@@ -73,6 +73,32 @@
       ],
       "right": [
         {
+          "displayMode": "onhover",
+          "iconColor": "none",
+          "id": "Network",
+          "textColor": "none"
+        },
+        {
+          "defaultSettings": {
+            "compactMode": false,
+            "defaultPeerAction": "copy-ip",
+            "hideDisconnected": false,
+            "hideMullvadExitNodes": true,
+            "loginServer": "",
+            "pingCount": 5,
+            "refreshInterval": 5000,
+            "showIpAddress": true,
+            "showPeerCount": true,
+            "showSearchBar": false,
+            "sshUsername": "",
+            "taildropDownloadDir": "~/Downloads",
+            "taildropEnabled": true,
+            "taildropReceiveMode": "operator",
+            "terminalCommand": ""
+          },
+          "id": "plugin:tailscale"
+        },
+        {
           "deviceNativePath": "__default__",
           "displayMode": "graphic-clean",
           "hideIfIdle": true,
