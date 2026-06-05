@@ -9,31 +9,41 @@
       self.nixosModules.development
       self.nixosModules.virtualisation
       self.nixosModules.work
-			self.nixosModules.syncthing
+      self.nixosModules.syncthing
     ];
 
     _module.args = {
       syncthingName = "workLaptop";
     };
 
-		hardware.graphics = {
-			enable = true;
-			enable32Bit = true;
-		};
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
 
-		hardware.graphics.extraPackages = with pkgs; [
-			intel-media-driver
-			vpl-gpu-rt
-		];
+    hardware.graphics.extraPackages = with pkgs; [
+      intel-media-driver
+      vpl-gpu-rt
+    ];
 
-		hardware.bluetooth = {
-			enable = true;
-			powerOnBoot = true;
-		};
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
 
-		powerManagement.enable = true;
-		services.power-profiles-daemon.enable = true;
-		services.upower.enable = true;
+    powerManagement.enable = true;
+    services.power-profiles-daemon.enable = true;
+    services.upower.enable = true;
+
+    # Used for inventory management for Dolbey
+    services.glpiAgent = {
+      enable = true;
+
+      settings = {
+        server = "https://glpi.dolbey.com/front/inventory.php";
+        tag = "nixos";
+      };
+    };
 
     # Setup Nix Garbage Collection for weekly runs (deletes older than 7 days)
     nix.gc = {
@@ -130,6 +140,7 @@
       git
       kitty
       xwayland-satellite # X11 Compatability for Wayland
+      glpi-agent
     ];
 
     # DO NOT, change this value, unless you SPECIFICALLY know why.
