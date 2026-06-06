@@ -16,6 +16,7 @@
         home.homeDirectory = "/home/brandon";
         home.sessionPath = [
           "$HOME/.config/emacs/bin"
+          "$HOME/.cargo/bin"
         ];
 
         home.packages = with pkgs; [
