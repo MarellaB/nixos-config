@@ -125,6 +125,7 @@
       git
       kitty
       xwayland-satellite # X11 Compatability for Wayland
+      blanket
     ];
 
     # Mounts secondary SSD
