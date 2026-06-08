@@ -5,7 +5,6 @@
     "position": "top",
     "monitors": [
       "DP-1",
-      "DP-3",
       "eDP-1"
     ],
     "density": "default",
@@ -32,6 +31,13 @@
     "widgets": {
       "left": [
         {
+          "displayMode": "alwaysShow",
+          "iconColor": "primary",
+          "id": "Volume",
+          "middleClickCommand": "/home/brandon/nixos-config/scripts/toggle_desktop_audio.sh",
+          "textColor": "none"
+        },
+        {
           "compactMode": false,
           "hideMode": "visible",
           "hideWhenIdle": false,
@@ -41,7 +47,7 @@
           "scrollingMode": "always",
           "showAlbumArt": false,
           "showArtistFirst": true,
-          "showProgressRing": true,
+          "showProgressRing": false,
           "showVisualizer": true,
           "textColor": "none",
           "useFixedWidth": true,
@@ -73,7 +79,7 @@
       ],
       "right": [
         {
-          "displayMode": "onhover",
+          "displayMode": "alwaysHide",
           "iconColor": "none",
           "id": "Network",
           "textColor": "none"
@@ -99,15 +105,6 @@
           "id": "plugin:tailscale"
         },
         {
-          "deviceNativePath": "__default__",
-          "displayMode": "graphic-clean",
-          "hideIfIdle": true,
-          "hideIfNotDetected": true,
-          "id": "Battery",
-          "showNoctaliaPerformance": true,
-          "showPowerProfiles": true
-        },
-        {
           "clockColor": "none",
           "customFont": "",
           "formatHorizontal": "h:mm AP - ddd, MMM dd",
@@ -115,13 +112,6 @@
           "id": "Clock",
           "tooltipFormat": "",
           "useCustomFont": false
-        },
-        {
-          "displayMode": "alwaysShow",
-          "iconColor": "primary",
-          "id": "Volume",
-          "middleClickCommand": "pwvucontrol || pavucontrol",
-          "textColor": "none"
         },
         {
           "colorizeSystemIcon": "primary",
@@ -138,8 +128,8 @@
     "mouseWheelAction": "none",
     "reverseScroll": false,
     "mouseWheelWrap": true,
-    "middleClickAction": "none",
-    "middleClickFollowMouse": false,
+    "middleClickAction": "settings",
+    "middleClickFollowMouse": true,
     "middleClickCommand": "",
     "rightClickAction": "controlCenter",
     "rightClickFollowMouse": true,
@@ -268,7 +258,7 @@
   "wallpaper": {
     "enabled": true,
     "overviewEnabled": false,
-    "directory": "/home/brandon/Pictures/Wallpapers",
+    "directory": "/home/brandon/nixos-config/wallpapers",
     "monitorDirectories": [],
     "enableMultiMonitorDirectories": false,
     "showHiddenFiles": false,
@@ -298,7 +288,7 @@
     "useOriginalImages": false,
     "overviewBlur": 0.4,
     "overviewTint": 0.6,
-    "useWallhaven": true,
+    "useWallhaven": false,
     "wallhavenQuery": "landscape",
     "wallhavenSorting": "relevance",
     "wallhavenOrder": "desc",
