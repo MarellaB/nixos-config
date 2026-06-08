@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-# 1. Define the names exactly as they appear in your image
+# 1. Define the names exactly as they appear
 DEV1="Blue Microphones Digital Stereo"
 DEV2="Starship/Matisse HD Audio Controller Analog Stereo"
 
