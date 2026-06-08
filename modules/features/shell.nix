@@ -12,6 +12,14 @@ let
         btop
       ];
 
+      programs.yazi = {
+        enable = true;
+        enableZshIntegration = true;
+        shellWrapperName = "y";
+      };
+
+      xdg.configFile."yazi".source = ../../configs/yazi;
+
       programs.zsh = {
         enable = true;
         initContent = ''
