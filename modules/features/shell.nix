@@ -162,6 +162,7 @@ let
         settings = {
           clipboard_control = "write-clipboard write-primary read-clipboard read-primary";
           allow_hyperlinks = "yes";
+          confirm_os_window_close = 0;
         };
         font = {
           name = "JetBrainsMono Nerd Font";

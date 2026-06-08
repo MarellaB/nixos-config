@@ -91,7 +91,6 @@
               "9, monitor:DP-3"
 
               "10, monitor:DP-4"
-
             ] else [ ];
             animations = {
               enabled = true;
