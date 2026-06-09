@@ -64,6 +64,8 @@
     # Enable networking
     networking.networkmanager.enable = true;
 
+    services.tailscale.enable = true;
+
     services.flatpak.enable = true;
     services.greetd = {
       enable = true;
@@ -142,6 +144,7 @@
       xwayland-satellite # X11 Compatability for Wayland
       glpi-agent
       libreoffice
+      xdg-utils
     ];
 
     # DO NOT, change this value, unless you SPECIFICALLY know why.
