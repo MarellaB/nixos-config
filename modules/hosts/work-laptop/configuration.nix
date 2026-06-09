@@ -141,6 +141,7 @@
       kitty
       xwayland-satellite # X11 Compatability for Wayland
       glpi-agent
+      libreoffice
     ];
 
     # DO NOT, change this value, unless you SPECIFICALLY know why.
