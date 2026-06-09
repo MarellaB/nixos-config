@@ -32,7 +32,6 @@ let
                 svelte-language-server
                 typescript
                 tailwindcss-language-server
-                eslint
             ];
 
             programs.emacs = {
