@@ -93,14 +93,14 @@
             "loginServer": "",
             "pingCount": 5,
             "refreshInterval": 5000,
-            "showIpAddress": true,
+            "showIpAddress": false,
             "showPeerCount": true,
             "showSearchBar": false,
             "sshUsername": "",
             "taildropDownloadDir": "~/Downloads",
             "taildropEnabled": true,
             "taildropReceiveMode": "operator",
-            "terminalCommand": ""
+            "terminalCommand": "kitty"
           },
           "id": "plugin:tailscale"
         },
