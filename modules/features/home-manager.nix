@@ -1,9 +1,15 @@
 { self, inputs, ... }: {
   flake.nixosModules.homeManager = { pkgs, lib, config, ... }:
     let
-      myNoctalia = self.packages.${pkgs.stdenv.hostPlatform.system}.myNoctalia;
       isDesktop = config.networking.hostName == "brandons-nixos-desktop";
       isWorkLaptop = config.networking.hostName == "brandon-marellas-work-laptop";
+      myNoctalia = inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
+        inherit pkgs;
+        settings = builtins.fromJSON (builtins.readFile (
+          if isDesktop then ./noctalia/desktop.json
+          else ./noctalia/workLaptop.json
+        ));
+      };
     in {
       imports = [ inputs.home-manager.nixosModules.home-manager ];
       home-manager.useGlobalPkgs = true;
