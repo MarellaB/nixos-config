@@ -36,9 +36,18 @@ let
 
             programs.emacs = {
                 enable = true;
-                package = pkgs.emacs30;
+                package = pkgs.symlinkJoin {
+                  name = "emacs-with-vterm-deps";
+                  paths = [ pkgs.emacs30 ];
+                  buildInputs = [ pkgs.makeWrapper ];
+                  postBuild = ''
+                    wrapProgram $out/bin/emacs \
+                        --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.cmake pkgs.gnumake pkgs.gcc pkgs.libtool ]} \
+                        --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath [ pkgs.libvterm ]}
+                  '';
+                };
                 extraPackages = epkgs: [
-                epkgs.treesit-grammars.with-all-grammars
+                  epkgs.treesit-grammars.with-all-grammars
                 ];
             };
             home.file.".local/share/treesit-grammars".source =
