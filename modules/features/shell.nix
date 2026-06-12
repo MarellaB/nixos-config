@@ -27,6 +27,11 @@ let
         shellWrapperName = "y";
       };
 
+      programs.direnv = {
+        enable = true;
+        nix-direnv.enable = true; # Fast Caching? (Gemini recommendation)
+      };
+
       xdg.configFile."yazi".source = ../../configs/yazi;
 
       programs.zsh = {
