@@ -3,6 +3,14 @@
 let
   workModule = { pkgs, ... }: {
 
+    # Used for VPN into the office
+    environment.systemPackages = with pkgs; [
+      strongswan
+      openssl
+    ];
+
+    services.strongswan-swanctl.enable = true;
+
     home-manager.users.brandon = {
       home.packages = with pkgs; [
         (with pkgs.dotnetCorePackages; combinePackages [
