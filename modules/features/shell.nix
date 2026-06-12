@@ -3,7 +3,14 @@
 let
   shellModule = { pkgs, ... }: {
 
-    services.openssh.enable = true;
+    services.openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false; # Prevent password fallback
+        PermitRootLogin = "no";
+      };
+    };
 
     home-manager.users.brandon = {
       home.packages = with pkgs; [
@@ -146,6 +153,20 @@ let
       programs.ssh = {
         enable = true;
         enableDefaultConfig = false; # This is deprecated, so setting to false now to get ahead
+        matchBlocks = {
+          "workLaptop" = {
+            hostname = "192.168.68.63";
+            user = "brandon";
+            # Type-checked local port forwarding list
+            localForwards = [
+                {
+                bind.port = 5000;
+                host.address = "127.0.0.1";
+                host.port = 5000;
+                }
+            ];
+          };
+        };
         settings = {
           "github.com" = {
             identityFile = "~/.ssh/id_ed25519";
