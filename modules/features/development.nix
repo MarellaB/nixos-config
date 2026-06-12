@@ -31,7 +31,6 @@ let
                 #vtsls
                 svelte-language-server
                 typescript
-                tailwindcss-language-server
             ];
 
             programs.emacs = {

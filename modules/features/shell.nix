@@ -3,6 +3,8 @@
 let
   shellModule = { pkgs, ... }: {
 
+    services.openssh.enable = true;
+
     home-manager.users.brandon = {
       home.packages = with pkgs; [
         fastfetch
