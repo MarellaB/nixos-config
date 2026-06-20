@@ -62,6 +62,9 @@
               repeat_rate = 70;
               repeat_delay = 250;
             };
+            cursor = {
+              inactive_timeout = 2;
+            };
             general = {
               gaps_in = 6;
               gaps_out = 12;

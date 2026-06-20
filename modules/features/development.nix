@@ -47,6 +47,7 @@ let
                   postBuild = ''
                     wrapProgram $out/bin/emacs \
                         --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.cmake pkgs.gnumake pkgs.gcc pkgs.libtool ]} \
+                        --prefix LIBRARY_PATH : ${pkgs.lib.makeLibraryPath [ pkgs.libvterm ]} \
                         --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath [ pkgs.libvterm ]}
                   '';
                 };
