@@ -23,6 +23,7 @@ let
         mongosh
         vi-mongo # TUI Mongo Editor
         teams-for-linux
+        libreoffice
       ];
     };
 
