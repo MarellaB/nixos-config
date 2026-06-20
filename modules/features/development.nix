@@ -31,6 +31,11 @@ let
                 #vtsls
                 svelte-language-server
                 typescript
+                tailwindcss-language-server
+
+                (pkgs.texlive.combine {
+                  inherit (pkgs.texlive) scheme-medium collection-latexextra collection-latexrecommended;
+                })
             ];
 
             programs.emacs = {
