@@ -78,12 +78,6 @@
       ],
       "right": [
         {
-          "displayMode": "alwaysHide",
-          "iconColor": "none",
-          "id": "Network",
-          "textColor": "none"
-        },
-        {
           "defaultSettings": {
             "compactMode": false,
             "defaultPeerAction": "copy-ip",
@@ -264,7 +258,7 @@
     "viewMode": "single",
     "setWallpaperOnAllMonitors": true,
     "linkLightAndDarkWallpapers": true,
-    "fillMode": "center",
+    "fillMode": "fit",
     "fillColor": "#000000",
     "useSolidColor": false,
     "solidColor": "#1a1a2e",
