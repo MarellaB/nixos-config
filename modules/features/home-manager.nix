@@ -128,6 +128,7 @@
 
               # Auto-Center a window
               "$mod SHIFT, P, exec, hyprctl dispatch resizeactive exact 2560 1440 && hyprctl dispatch centerwindow"
+              "$mod SHIFT, O, exec, hyprctl dispatch resizeactive exact 1920 1080 && hyprctl dispatch centerwindow"
 
               "$mod, H, movefocus, l"
               "$mod SHIFT, H, movewindow, l"

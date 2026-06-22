@@ -13,6 +13,7 @@
       self.nixosModules.work
       self.nixosModules.virtualisation
       self.nixosModules.syncthing
+      self.nixosModules.threedprinting
     ];
 
     _module.args = {
