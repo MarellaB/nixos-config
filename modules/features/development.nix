@@ -24,6 +24,8 @@ let
                 cargo
                 rust-analyzer
 
+                python3
+
                 self.packages.${pkgs.stdenv.hostPlatform.system}.neovim
                 libvterm-neovim
 

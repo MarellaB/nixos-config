@@ -164,6 +164,8 @@
               "$mod SHIFT, S, movetoworkspace, special"
             ];
             bindl = [
+              ", XF86MonBrightnessUp, exec, noctalia shell ipc call brightness increase"
+              ", XF86MonBrightnessDown, exec, noctalia shell ipc call brightness decrease"
               ", XF86AudioPlay, exec, playerctl play-pause"
               ", XF86AudioPause, exec, playerctl play-pause"
               ", XF86AudioNext, exec, playerctl next"

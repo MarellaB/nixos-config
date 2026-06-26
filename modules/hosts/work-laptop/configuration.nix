@@ -136,6 +136,11 @@
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
+    services.logind = {
+      powerKey = "hibernate";
+      powerKeyLongPress = "ignore";
+    };
+
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [

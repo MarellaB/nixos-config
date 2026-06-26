@@ -79,6 +79,13 @@
       ],
       "right": [
         {
+          "applyToAllMonitors": false,
+          "displayMode": "onhover",
+          "iconColor": "none",
+          "id": "Brightness",
+          "textColor": "none"
+        },
+        {
           "displayMode": "alwaysHide",
           "iconColor": "none",
           "id": "Network",
