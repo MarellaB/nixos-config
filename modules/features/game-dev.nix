@@ -7,6 +7,7 @@
         godot
         inkscape
         itch
+        blockbench
       ];
     };
 
