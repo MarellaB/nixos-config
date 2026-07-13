@@ -158,21 +158,17 @@ let
       programs.ssh = {
         enable = true;
         enableDefaultConfig = false; # This is deprecated, so setting to false now to get ahead
-        matchBlocks = {
-          "workLaptop" = {
-            hostname = "192.168.68.63";
-            user = "brandon";
-            # Type-checked local port forwarding list
-            localForwards = [
-                {
-                bind.port = 5000;
-                host.address = "127.0.0.1";
-                host.port = 5000;
-                }
+        settings = {
+          "Host workLaptop" = {
+            HostName = "192.168.68.66";
+            User = "brandon";
+            LocalForward = [
+              "5000 127.0.0.1:5000"
+              "8080 127.0.0.1:8080"
+              "8443 jira.domain:8443"
+              "8444 gitlab.dolbey.com:443"
             ];
           };
-        };
-        settings = {
           "github.com" = {
             identityFile = "~/.ssh/id_ed25519";
             user = "git";

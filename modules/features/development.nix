@@ -31,14 +31,12 @@ let
                 libvterm-neovim
 
                 typescript-language-server
-                #vtsls
                 svelte-language-server
                 typescript
                 tailwindcss-language-server
 
-                (pkgs.texlive.combine {
-                  inherit (pkgs.texlive) scheme-medium collection-latexextra collection-latexrecommended;
-                })
+                # Used for emacs org mode view
+                graphviz
             ];
 
             programs.emacs = {

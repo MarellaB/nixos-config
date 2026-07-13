@@ -29,12 +29,11 @@
           playerctl
           hyprshot
           spotify
-          logseq
           localsend
         ];
 
         home.pointerCursor = {
-          gtk.enable = true;
+          enable = true;
           package = pkgs.adwaita-icon-theme;
           name = "Adwaita";
           size = 24;

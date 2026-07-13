@@ -13,7 +13,7 @@
       self.nixosModules.work
       self.nixosModules.virtualisation
       self.nixosModules.syncthing
-      self.nixosModules.threedprinting
+      # self.nixosModules.threedprinting # Disabled for now so as to stop GDAL from breaking rebuilds from a faulty test.
     ];
 
     _module.args = {
@@ -120,6 +120,11 @@
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
+    services.logind.settings.Login = {
+      handlePowerKey = "hibernate";
+      handlePowerKeyLongPress = "ignore";
+    };
+
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
@@ -127,6 +132,7 @@
       kitty
       xwayland-satellite # X11 Compatability for Wayland
       blanket
+      wine
     ];
 
     # Mounts secondary SSD
