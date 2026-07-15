@@ -201,7 +201,7 @@
               monitor = "";
               color = "rgba(0, 0, 0, 1.0)";
             }];
-            input-field = [
+            input-field = if isDesktop then [
               {
                 monitor = "DP-1";
                 size = "400, 60";
@@ -213,6 +213,7 @@
                 halign = "center";
                 valign = "center";
               }
+            ] else if isWorkLaptop then [
               {
                 monitor = "eDP-1";
                 size = "400, 60";
@@ -235,7 +236,7 @@
                 halign = "center";
                 valign = "center";
               }
-            ];
+            ] else [ ];
           };
         };
       };
