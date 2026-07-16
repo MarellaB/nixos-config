@@ -136,9 +136,9 @@
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
-    services.logind = {
-      powerKey = "hibernate";
-      powerKeyLongPress = "ignore";
+    services.logind.settings.Login = {
+      handlePowerKey = "hibernate";
+      handlePowerKeyLongPress = "ignore";
     };
 
     # List packages installed in system profile. To search, run:

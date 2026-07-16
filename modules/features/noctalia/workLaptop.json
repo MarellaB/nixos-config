@@ -114,8 +114,8 @@
         {
           "deviceNativePath": "__default__",
           "displayMode": "graphic-clean",
-          "hideIfIdle": true,
-          "hideIfNotDetected": true,
+          "hideIfIdle": false,
+          "hideIfNotDetected": false,
           "id": "Battery",
           "showNoctaliaPerformance": false,
           "showPowerProfiles": true
