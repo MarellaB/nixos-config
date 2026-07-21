@@ -167,6 +167,7 @@ let
               "8080 127.0.0.1:8080"
               "8443 jira.domain:8443"
               "8444 gitlab.dolbey.com:443"
+              "8445 gitlab.dolbey.com:22"
             ];
           };
           "github.com" = {
