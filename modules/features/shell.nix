@@ -16,6 +16,8 @@ let
       home.packages = with pkgs; [
         fastfetch
         nerd-fonts.jetbrains-mono
+        nerd-fonts.symbols-only
+        symbola
         fd
         ripgrep
         btop

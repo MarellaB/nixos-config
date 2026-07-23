@@ -35,6 +35,13 @@ let
         typescript
         tailwindcss-language-server
 
+        nixfmt
+        shellcheck
+        pandoc
+        html-tidy
+        stylelint
+        js-beautify
+
         # Used for emacs org mode view
         graphviz
       ];
