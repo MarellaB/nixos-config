@@ -51,6 +51,8 @@
     # Enable networking
     networking.networkmanager.enable = true;
 
+    services.tailscale.enable = true;
+
     services.greetd = {
       enable = true;
       settings = {
