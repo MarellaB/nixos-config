@@ -16,6 +16,10 @@
       home-manager.useUserPackages = true;
       home-manager.backupFileExtension = "backup";
 
+      # Opens the ports used for LocalSend
+      networking.firewall.allowedTCPPorts = [ 53317 ];
+      networking.firewall.allowedUDPPorts = [ 53317 ];
+
       home-manager.users.brandon = {
         home.stateVersion = "25.11";
         home.username = "brandon";
