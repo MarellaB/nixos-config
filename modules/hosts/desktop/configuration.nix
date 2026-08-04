@@ -22,7 +22,7 @@
 
     # Enables NVIDIA drivers and Configurations
     hardware.graphics.enable = true;
-    services.xserver.videoDrivers = ["nvidia"];
+    services.xserver.videoDrivers = [ "nvidia" ];
 
     services.flatpak.enable = true;
 
@@ -39,7 +39,10 @@
       options = "--delete-older-than 7d";
     };
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
@@ -66,7 +69,6 @@
         };
       };
     };
-
 
     time.timeZone = "America/New_York";
     i18n.defaultLocale = "en_US.UTF-8";
@@ -105,13 +107,20 @@
       pulse.enable = true;
     };
 
-    # Enable touchpad support (enabled default in most desktopManager).
-    # services.xserver.libinput.enable = true;
+    services.udev.extraRules = ''
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="users", TAG+="uaccess"
+    '';
+
+    users.groups.plugdev = { };
 
     users.users.brandon = {
       isNormalUser = true;
       description = "brandon";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "plugdev"
+      ];
       shell = pkgs.zsh;
     };
 
@@ -135,6 +144,7 @@
       xwayland-satellite # X11 Compatability for Wayland
       blanket
       wine
+      vial
     ];
 
     # Mounts secondary SSD
