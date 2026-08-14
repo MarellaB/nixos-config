@@ -7,6 +7,14 @@
 show_hidden    = true
 
 [opener]
-edit = [
-     { run = 'nvim "$@"', block = true, for = "unix" },
+neovim = [
+  { run = 'nvim "$@"', desc = "Open in Neovim", block = true, orphan = false }
+]
+firefox = [
+  { run = 'firefox "$@"', desc = "Open in Firefox", orphan = true }
+]
+
+[open]
+rules = [
+  { mime = "text/html", use = ["neovim", "firefox"] },
 ]
