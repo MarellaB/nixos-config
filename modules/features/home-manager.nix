@@ -117,7 +117,7 @@
             bind = [
               "$mod, C, exec, ${lib.getExe pkgs.kitty}"
               "$mod, B, exec, ${lib.getExe pkgs.firefox}"
-              "$mod, E, exec, ${lib.getExe pkgs.emacs}"
+              "$mod, E, exec, ${lib.getExe config.home-manager.users.brandon.programs.emacs.finalPackage}"
               "$mod, D, exec, ${lib.getExe pkgs.kitty} yazi"
 
               "$mod, Q, killactive"
