@@ -13,6 +13,7 @@
       self.nixosModules.work
       self.nixosModules.virtualisation
       self.nixosModules.syncthing
+      self.nixosModules.videoEditing
       # self.nixosModules.threedprinting # Disabled for now so as to stop GDAL from breaking rebuilds from a faulty test.
     ];
 
