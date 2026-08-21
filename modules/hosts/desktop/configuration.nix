@@ -21,6 +21,13 @@
       syncthingName = "desktop";
     };
 
+    networking.hosts = {
+        "127.0.0.1" = [
+            "jira.domain"
+            "gitlab.dolbey.com"
+        ];
+    };
+
     # Enables NVIDIA drivers and Configurations
     hardware.graphics.enable = true;
     services.xserver.videoDrivers = [ "nvidia" ];
