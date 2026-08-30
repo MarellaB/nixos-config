@@ -161,6 +161,14 @@ let
         enable = true;
         enableDefaultConfig = false; # This is deprecated, so setting to false now to get ahead
         settings = {
+          "Host wrench" = {
+            HostName = "192.168.68.51";
+            User = "admin";
+          };
+          "Host hammer" = {
+            HostName = "64.227.29.200";
+            User = "brandon";
+          };
           "Host workLaptop" = {
             HostName = "192.168.68.66";
             User = "brandon";

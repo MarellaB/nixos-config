@@ -3,6 +3,7 @@
     let
       isDesktop = config.networking.hostName == "brandons-nixos-desktop";
       isWorkLaptop = config.networking.hostName == "brandon-marellas-work-laptop";
+      mod = "SUPER";
       myNoctalia = inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
         inherit pkgs;
         settings = builtins.fromJSON (builtins.readFile (
@@ -34,6 +35,7 @@
           hyprshot
           spotify
           localsend
+          anki
         ];
 
         home.pointerCursor = {
@@ -113,58 +115,57 @@
                 "workspaces,1,2,default"
               ];
             };
-            "$mod" = "SUPER";
             bind = [
-              "$mod, C, exec, ${lib.getExe pkgs.kitty}"
-              "$mod, B, exec, ${lib.getExe pkgs.firefox}"
-              "$mod, E, exec, ${lib.getExe config.home-manager.users.brandon.programs.emacs.finalPackage}"
-              "$mod, D, exec, ${lib.getExe pkgs.kitty} yazi"
+              "${mod}, C, exec, ${lib.getExe pkgs.kitty}"
+              "${mod}, B, exec, ${lib.getExe pkgs.firefox}"
+              "${mod}, E, exec, ${lib.getExe config.home-manager.users.brandon.programs.emacs.finalPackage}"
+              "${mod}, D, exec, ${lib.getExe pkgs.kitty} yazi"
 
-              "$mod, Q, killactive"
-              "$mod SHIFT, Q, forcekillactive"
-              "$mod SHIFT, F, fullscreen, 0"
-              "$mod, P, pseudo"
-              "$mod, V, togglefloating"
-              "$mod CTRL SHIFT, 4, exec, ${lib.getExe pkgs.hyprshot} -m region --clipboard-only"
-              "$mod CTRL SHIFT, L, exec, ${lib.getExe pkgs.hyprlock}"
-              "$mod, Space, exec, ${lib.getExe myNoctalia} ipc call launcher toggle"
+              "${mod}, Q, killactive"
+              "${mod} SHIFT, Q, forcekillactive"
+              "${mod} SHIFT, F, fullscreen, 0"
+              "${mod}, P, pseudo"
+              "${mod}, V, togglefloating"
+              "${mod} CTRL SHIFT, 4, exec, ${lib.getExe pkgs.hyprshot} -m region --clipboard-only"
+              "${mod} CTRL SHIFT, L, exec, ${lib.getExe pkgs.hyprlock}"
+              "${mod}, Space, exec, ${lib.getExe myNoctalia} ipc call launcher toggle"
 
               # Auto-Center a window
-              "$mod SHIFT, P, exec, hyprctl dispatch resizeactive exact 2560 1440 && hyprctl dispatch centerwindow"
-              "$mod SHIFT, O, exec, hyprctl dispatch resizeactive exact 1920 1080 && hyprctl dispatch centerwindow"
+              "${mod} SHIFT, P, exec, hyprctl dispatch resizeactive exact 2560 1440 && hyprctl dispatch centerwindow"
+              "${mod} SHIFT, O, exec, hyprctl dispatch resizeactive exact 1920 1080 && hyprctl dispatch centerwindow"
 
-              "$mod, H, movefocus, l"
-              "$mod SHIFT, H, movewindow, l"
-              "$mod, L, movefocus, r"
-              "$mod SHIFT, L, movewindow, r"
-              "$mod, K, movefocus, u"
-              "$mod SHIFT, K, movewindow, u"
-              "$mod, J, movefocus, d"
-              "$mod SHIFT, J, movewindow, d"
+              "${mod}, H, movefocus, l"
+              "${mod} SHIFT, H, movewindow, l"
+              "${mod}, L, movefocus, r"
+              "${mod} SHIFT, L, movewindow, r"
+              "${mod}, K, movefocus, u"
+              "${mod} SHIFT, K, movewindow, u"
+              "${mod}, J, movefocus, d"
+              "${mod} SHIFT, J, movewindow, d"
 
-              "$mod, 1, workspace, 1"
-              "$mod, 2, workspace, 2"
-              "$mod, 3, workspace, 3"
-              "$mod, 4, workspace, 4"
-              "$mod, 5, workspace, 5"
-              "$mod, 6, workspace, 6"
-              "$mod, 7, workspace, 7"
-              "$mod, 8, workspace, 8"
-              "$mod, 9, workspace, 9"
-              "$mod, 0, workspace, 10"
-              "$mod SHIFT, 1, movetoworkspace, 1"
-              "$mod SHIFT, 2, movetoworkspace, 2"
-              "$mod SHIFT, 3, movetoworkspace, 3"
-              "$mod SHIFT, 4, movetoworkspace, 4"
-              "$mod SHIFT, 5, movetoworkspace, 5"
-              "$mod SHIFT, 6, movetoworkspace, 6"
-              "$mod SHIFT, 7, movetoworkspace, 7"
-              "$mod SHIFT, 8, movetoworkspace, 8"
-              "$mod SHIFT, 9, movetoworkspace, 9"
-              "$mod SHIFT, 0, movetoworkspace, 10"
+              "${mod}, 1, workspace, 1"
+              "${mod}, 2, workspace, 2"
+              "${mod}, 3, workspace, 3"
+              "${mod}, 4, workspace, 4"
+              "${mod}, 5, workspace, 5"
+              "${mod}, 6, workspace, 6"
+              "${mod}, 7, workspace, 7"
+              "${mod}, 8, workspace, 8"
+              "${mod}, 9, workspace, 9"
+              "${mod}, 0, workspace, 10"
+              "${mod} SHIFT, 1, movetoworkspace, 1"
+              "${mod} SHIFT, 2, movetoworkspace, 2"
+              "${mod} SHIFT, 3, movetoworkspace, 3"
+              "${mod} SHIFT, 4, movetoworkspace, 4"
+              "${mod} SHIFT, 5, movetoworkspace, 5"
+              "${mod} SHIFT, 6, movetoworkspace, 6"
+              "${mod} SHIFT, 7, movetoworkspace, 7"
+              "${mod} SHIFT, 8, movetoworkspace, 8"
+              "${mod} SHIFT, 9, movetoworkspace, 9"
+              "${mod} SHIFT, 0, movetoworkspace, 10"
 
-              "$mod, S, togglespecialworkspace"
-              "$mod SHIFT, S, movetoworkspace, special"
+              "${mod}, S, togglespecialworkspace"
+              "${mod} SHIFT, S, movetoworkspace, special"
             ];
             bindl = [
               ", XF86MonBrightnessUp, exec, noctalia shell ipc call brightness increase"
@@ -180,8 +181,8 @@
               ", switch:on:Lid Switch, exec, hyprctl monitors | grep -q -v 'eDP-1' && hyprctl keyword monitor 'eDP-1, disable' || systemctl suspend"
             ];
             bindm = [
-              "$mod, mouse:272, movewindow"
-              "$mod, mouse:273, resizewindow"
+              "${mod}, mouse:272, movewindow"
+              "${mod}, mouse:273, resizewindow"
             ];
             env = [
               "XCURSOR_THEME,Adwaita"
