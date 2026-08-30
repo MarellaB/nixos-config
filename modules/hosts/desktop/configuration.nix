@@ -34,6 +34,20 @@
 
     services.flatpak.enable = true;
 
+    services.avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+
+    services.printing = {
+      enable = true;
+      drivers = with pkgs; [
+        cups-filters
+        cups-browsed
+      ];
+    };
+
     hardware.nvidia = {
       modesetting.enable = true;
       open = true;
@@ -101,9 +115,6 @@
         variant = "";
       };
     };
-
-    # Enable CUPS to print documents.
-    services.printing.enable = true;
 
     # Enable sound with pipewire.
     services.pulseaudio.enable = false;
