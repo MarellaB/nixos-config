@@ -145,7 +145,12 @@
 
     # Install firefox.
     programs.firefox.enable = true;
+    # Lets Firefox install/run sites as standalone "app" windows (via firefoxpwa,
+    # using the "PWAs for Firefox" extension by Filip Stamcar).
+    programs.firefox.nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
     programs.zsh.enable = true;
+
+    programs.kdeconnect.enable = true;
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
@@ -164,6 +169,7 @@
       blanket
       wine
       vial
+      firefoxpwa
     ];
 
     # Mounts secondary SSD
