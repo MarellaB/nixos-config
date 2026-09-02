@@ -47,6 +47,22 @@
         };
 
 
+        systemd.user.services.noctalia-shell = {
+          Unit = {
+            Description = "Noctalia desktop shell";
+            After = [ "hyprland-session.target" ];
+            PartOf = [ "hyprland-session.target" ];
+          };
+          Service = {
+            ExecStart = lib.getExe myNoctalia;
+            Restart = "on-failure";
+            RestartSec = 1;
+          };
+          Install = {
+            WantedBy = [ "hyprland-session.target" ];
+          };
+        };
+
         wayland.windowManager.hyprland = {
           enable = true;
           settings = {
@@ -60,7 +76,6 @@
             ];
             exec-once = [
               (lib.getExe pkgs.hyprlock)
-              (lib.getExe myNoctalia)
             ];
             input = {
               kb_layout = "us,ua";
