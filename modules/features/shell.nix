@@ -21,6 +21,7 @@ let
         fd
         ripgrep
         btop
+        mosh
       ];
 
       programs.yazi = {
