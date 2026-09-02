@@ -32,6 +32,11 @@
     hardware.graphics.enable = true;
     services.xserver.videoDrivers = [ "nvidia" ];
 
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+
     services.flatpak.enable = true;
 
     services.avahi = {
