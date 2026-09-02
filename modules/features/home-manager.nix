@@ -36,6 +36,7 @@
           spotify
           localsend
           anki
+          wl-clipboard
         ];
 
         home.pointerCursor = {
