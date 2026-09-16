@@ -55,6 +55,11 @@ let
         ];
       };
 
+      services.emacs = {
+        enable = true;
+        client.enable = true;
+      };
+
       home.file.".local/share/treesit-grammars".source =
         pkgs.symlinkJoin {
           name = "treesit-grammars";
