@@ -48,7 +48,7 @@ let
 
       programs.emacs = {
         enable = true;
-        package = pkgs.emacs30;
+        package = pkgs.emacs;
         extraPackages = epkgs: [
           epkgs.vterm
           epkgs.treesit-grammars.with-all-grammars
