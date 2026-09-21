@@ -81,13 +81,6 @@
       ],
       "right": [
         {
-          "applyToAllMonitors": false,
-          "displayMode": "onhover",
-          "iconColor": "none",
-          "id": "Brightness",
-          "textColor": "none"
-        },
-        {
           "displayMode": "alwaysHide",
           "iconColor": "none",
           "id": "Network",
@@ -121,6 +114,16 @@
           "id": "Battery",
           "showNoctaliaPerformance": false,
           "showPowerProfiles": true
+        },
+        {
+          "id": "plugin:kde-connect"
+        },
+        {
+          "applyToAllMonitors": false,
+          "displayMode": "onhover",
+          "iconColor": "none",
+          "id": "Brightness",
+          "textColor": "none"
         },
         {
           "clockColor": "none",
