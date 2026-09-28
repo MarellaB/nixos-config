@@ -8,10 +8,10 @@ show_hidden    = true
 
 [opener]
 neovim = [
-  { run = 'nvim "$@"', desc = "Open in Neovim", block = true, orphan = false }
+  { run = 'nvim %s', desc = "Open in Neovim", block = true, orphan = false }
 ]
 firefox = [
-  { run = 'firefox "$@"', desc = "Open in Firefox", orphan = true }
+  { run = 'firefox --new-tab %s', desc = "Open in Firefox", orphan = true }
 ]
 
 [open]

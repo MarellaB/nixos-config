@@ -107,15 +107,7 @@
           "id": "plugin:tailscale"
         },
         {
-          "deviceNativePath": "__default__",
-          "displayMode": "graphic-clean",
-          "hideIfIdle": false,
-          "hideIfNotDetected": false,
-          "id": "Battery",
-          "showNoctaliaPerformance": false,
-          "showPowerProfiles": true
-        },
-        {
+          "defaultSettings": {},
           "id": "plugin:kde-connect"
         },
         {
@@ -124,6 +116,21 @@
           "iconColor": "none",
           "id": "Brightness",
           "textColor": "none"
+        },
+        {
+          "displayMode": "onhover",
+          "iconColor": "none",
+          "id": "Bluetooth",
+          "textColor": "none"
+        },
+        {
+          "deviceNativePath": "__default__",
+          "displayMode": "graphic-clean",
+          "hideIfIdle": false,
+          "hideIfNotDetected": false,
+          "id": "Battery",
+          "showNoctaliaPerformance": false,
+          "showPowerProfiles": true
         },
         {
           "clockColor": "none",

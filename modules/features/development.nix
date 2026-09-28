@@ -20,6 +20,7 @@ let
         nodejs
 
         nixd
+        nixfmt
 
         rustc
         cargo
@@ -35,7 +36,6 @@ let
         typescript
         tailwindcss-language-server
 
-        nixfmt
         shellcheck
         pandoc
         html-tidy

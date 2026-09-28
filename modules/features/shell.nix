@@ -50,6 +50,10 @@ let
           sudo nixos-rebuild switch --flake ~/nixos-config#$host $extra_args
           fi
           }
+
+          vpn() {
+          sudo ~/vpn/dolbey-vpn-nix.sh "$@"
+          }
         '';
       };
 
