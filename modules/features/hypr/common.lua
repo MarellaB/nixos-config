@@ -6,8 +6,8 @@ local mod = "SUPER"
 
 hl.config({
   general = {
-    gaps_in = 6,
-    gaps_out = 12,
+    gaps_in = 4,
+    gaps_out = 8,
     col = {
       active_border = "rgba(DDDDDDAA)",
       inactive_border = "rgba(DDDDDD33)",
@@ -29,9 +29,35 @@ hl.config({
   }
 })
 
+hl.curve("easy", { type = "spring", mass = 1, stiffness = 714.36, dampening = 41.93 })
+
 hl.animation({
-    leaf = "global",
-    enabled = false
+    leaf = "windowsIn",
+    enabled = true,
+    speed = 1,
+    spring = "easy",
+})
+
+hl.animation({
+    leaf = "windowsMove",
+    enabled = true,
+    speed = 1,
+    spring = "easy",
+})
+
+hl.animation({
+    leaf = "fadeOut",
+    enabled = true,
+    speed = 1,
+    bezier = "default",
+})
+
+hl.animation({
+    leaf = "workspaces",
+    enabled = true,
+    speed = 2,
+    bezier = "default",
+    style = "slide",
 })
 
 -- Invert horizontal scrolling
