@@ -73,26 +73,33 @@ hl.bind(mod .. " + E", hl.dsp.exec_cmd("emacsclient -c -a ''"))
 hl.bind(mod .. " + D", hl.dsp.exec_cmd("kitty yazi"))
 
 hl.bind(mod .. " + Q", hl.dsp.window.close())
-hl.bind(mod .. " + SHIFT + Q", hl.dsp.exec_cmd("hyprctl dispatch forcekillactive"))
-hl.bind(mod .. " + SHIFT + F", hl.dsp.exec_cmd("hyprctl dispatch fullscreen 0"))
+hl.bind(mod .. " + SHIFT + Q", hl.dsp.window.kill())
+hl.bind(mod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 hl.bind(mod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mod .. " + CTRL + SHIFT + 4", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
 hl.bind(mod .. " + CTRL + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mod .. " + Space", hl.dsp.exec_cmd("noctalia-shell ipc call launcher toggle"))
 
--- Auto-center a window
-hl.bind(mod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprctl dispatch resizeactive exact 2560 1440 && hyprctl dispatch centerwindow"))
-hl.bind(mod .. " + SHIFT + O", hl.dsp.exec_cmd("hyprctl dispatch resizeactive exact 1920 1080 && hyprctl dispatch centerwindow"))
+-- Auto-center a window. Two dispatches chained in one bind, hence a
+-- callback rather than a single hl.dsp.* expression like the other binds.
+hl.bind(mod .. " + SHIFT + P", function()
+  hl.dispatch(hl.dsp.window.resize({ x = 2560, y = 1440, relative = false }))
+  hl.dispatch(hl.dsp.window.center())
+end)
+hl.bind(mod .. " + SHIFT + O", function()
+  hl.dispatch(hl.dsp.window.resize({ x = 1920, y = 1080, relative = false }))
+  hl.dispatch(hl.dsp.window.center())
+end)
 
 hl.bind(mod .. " + H", hl.dsp.focus({ direction = "left" }))
-hl.bind(mod .. " + SHIFT + H", hl.dsp.exec_cmd("hyprctl dispatch movewindow l"))
+hl.bind(mod .. " + SHIFT + H", hl.dsp.window.move({ direction = "l" }))
 hl.bind(mod .. " + L", hl.dsp.focus({ direction = "right" }))
-hl.bind(mod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprctl dispatch movewindow r"))
+hl.bind(mod .. " + SHIFT + L", hl.dsp.window.move({ direction = "r" }))
 hl.bind(mod .. " + K", hl.dsp.focus({ direction = "up" }))
-hl.bind(mod .. " + SHIFT + K", hl.dsp.exec_cmd("hyprctl dispatch movewindow u"))
+hl.bind(mod .. " + SHIFT + K", hl.dsp.window.move({ direction = "u" }))
 hl.bind(mod .. " + J", hl.dsp.focus({ direction = "down" }))
-hl.bind(mod .. " + SHIFT + J", hl.dsp.exec_cmd("hyprctl dispatch movewindow d"))
+hl.bind(mod .. " + SHIFT + J", hl.dsp.window.move({ direction = "d" }))
 
 for i = 1, 10 do
   local key = i % 10
