@@ -67,16 +67,41 @@
     services.tailscale.enable = true;
 
     services.flatpak.enable = true;
+
     services.greetd = {
       enable = true;
+      settings.default_session.user = "greeter";
+    };
+    services.displayManager.noctalia-greeter = {
+      enable = true;
+      passwordlessSyncUsers = [ "brandon" ];
       settings = {
-        default_session = {
-          command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland";
-          user = "greeter";
-        };
-        initial_session = {
-          command = "start-hyprland";
-          user = "brandon";
+        session.default = "Hyprland";
+        appearance = {
+          scheme = "Synced";
+          theme_mode = "dark";
+          palette = {
+            primary = "#aaaaaa";
+            on_primary = "#111111";
+            secondary = "#a7a7a7";
+            on_secondary = "#111111";
+            tertiary = "#cccccc";
+            on_tertiary = "#111111";
+            error = "#dddddd";
+            on_error = "#111111";
+            surface = "#111111";
+            on_surface = "#828282";
+            surface_variant = "#191919";
+            on_surface_variant = "#5d5d5d";
+            outline = "#3c3c3c";
+            shadow = "#000000";
+            hover = "#cccccc";
+            on_hover = "#111111";
+          };
+          wallpaper = {
+            path = "/home/brandon/Pictures/Wallpapers/wallhaven_xl39e3.jpg";
+            fill_mode = "center";
+          };
         };
       };
     };

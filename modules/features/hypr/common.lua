@@ -78,7 +78,7 @@ hl.bind(mod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen", a
 hl.bind(mod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mod .. " + CTRL + SHIFT + 4", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
-hl.bind(mod .. " + CTRL + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mod .. " + CTRL + SHIFT + L", hl.dsp.exec_cmd("noctalia-lock"))
 hl.bind(mod .. " + Space", hl.dsp.exec_cmd("noctalia-shell ipc call launcher toggle"))
 
 -- Auto-center a window. Two dispatches chained in one bind, hence a
@@ -123,11 +123,3 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
-
--- Lock screen: wait for a real monitor to actually be enumerated before
--- firing hyprlock, instead of racing it via a plain exec-once (the cause
--- of hyprlock sometimes never appearing on boot). Falls back to just
--- launching after ~5s regardless.
-hl.on("hyprland.start", function()
-  hl.dsp.exec_cmd("for i in $(seq 1 50); do hyprctl monitors -j 2>/dev/null | grep -q '\"disabled\": false' && break; sleep 0.1; done; exec hyprlock")
-end)

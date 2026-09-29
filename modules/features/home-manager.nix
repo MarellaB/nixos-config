@@ -2,7 +2,6 @@
   flake.nixosModules.homeManager = { pkgs, lib, config, ... }:
     let
       isDesktop = config.networking.hostName == "brandons-nixos-desktop";
-      isWorkLaptop = config.networking.hostName == "brandon-marellas-work-laptop";
       myNoctalia = inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
         inherit pkgs;
         settings = builtins.fromJSON (builtins.readFile (
@@ -10,6 +9,24 @@
           else ./noctalia/workLaptop.json
         ));
       };
+      # Manual lock command (bound to a keybind in common.lua). Noctalia's
+      # IPC can't find the running instance by config path (a bug on this
+      # version -- `noctalia-shell ipc show` reports "No running instances"
+      # even for the exact path it was launched with), so target it by PID
+      # instead. `loginctl lock-session` does NOT reach Noctalia's lock
+      # screen on this version either; its own lockScreen.lock() IPC call
+      # is what actually works. Retries briefly in case it's ever called
+      # before noctalia-shell has finished starting.
+      noctaliaLock = pkgs.writeShellScriptBin "noctalia-lock" ''
+        for _ in $(seq 1 50); do
+          pid=$(${pkgs.procps}/bin/pgrep -f 'bin/quickshell -p .*noctalia-shell$' || true)
+          if [ -n "$pid" ] && ${lib.getExe myNoctalia} ipc --pid "$pid" call lockScreen lock 2>/dev/null; then
+            exit 0
+          fi
+          sleep 0.2
+        done
+        exit 1
+      '';
     in {
       imports = [ inputs.home-manager.nixosModules.home-manager ];
       home-manager.useGlobalPkgs = true;
@@ -38,6 +55,7 @@
           wl-clipboard
           jq
           myNoctalia
+          noctaliaLock
         ];
 
         home.pointerCursor = {
@@ -78,53 +96,6 @@
               content = if isDesktop then ./hypr/desktop.lua else ./hypr/work-laptop.lua;
               autoLoad = true;
             };
-          };
-        };
-
-
-        programs.hyprlock = {
-          enable = true;
-          settings = {
-            background = [{
-              monitor = "";
-              color = "rgba(0, 0, 0, 1.0)";
-            }];
-            input-field = if isDesktop then [
-              {
-                monitor = "DP-1";
-                size = "400, 60";
-                outline_thickness = 1;
-                outer_color = "rgb(255, 255, 255)";
-                inner_color = "rgb(0, 0, 0)";
-                font_color = "rgb(255, 255, 255)";
-                placeholder_text = "Password";
-                halign = "center";
-                valign = "center";
-              }
-            ] else if isWorkLaptop then [
-              {
-                monitor = "eDP-1";
-                size = "400, 60";
-                outline_thickness = 1;
-                outer_color = "rgb(255, 255, 255)";
-                inner_color = "rgb(0, 0, 0)";
-                font_color = "rgb(255, 255, 255)";
-                placeholder_text = "Password";
-                halign = "center";
-                valign = "center";
-              }
-              {
-                monitor = "DP-3";
-                size = "400, 60";
-                outline_thickness = 1;
-                outer_color = "rgb(255, 255, 255)";
-                inner_color = "rgb(0, 0, 0)";
-                font_color = "rgb(255, 255, 255)";
-                placeholder_text = "Password";
-                halign = "center";
-                valign = "center";
-              }
-            ] else [ ];
           };
         };
       };

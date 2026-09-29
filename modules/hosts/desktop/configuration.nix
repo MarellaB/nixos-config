@@ -85,16 +85,12 @@
 
     services.greetd = {
       enable = true;
-      settings = {
-        default_session = {
-          command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland";
-          user = "greeter";
-        };
-        initial_session = {
-          command = "start-hyprland";
-          user = "brandon";
-        };
-      };
+      settings.default_session.user = "greeter";
+    };
+    services.displayManager.noctalia-greeter = {
+      enable = true;
+      settings.session.default = "Hyprland";
+      passwordlessSyncUsers = [ "brandon" ];
     };
 
     time.timeZone = "America/New_York";
