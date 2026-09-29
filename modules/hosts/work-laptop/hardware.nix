@@ -7,7 +7,9 @@
 			];
 
 		boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "rtsx_pci_sdmmc" ];
-		boot.initrd.kernelModules = [ ];
+		# Early KMS: load the GPU driver in initrd so greetd/hyprlock aren't
+		# racing display enumeration against userspace driver loading.
+		boot.initrd.kernelModules = [ "i915" ];
 		boot.kernelModules = [ "kvm-intel" ];
 		boot.extraModulePackages = [ ];
 
