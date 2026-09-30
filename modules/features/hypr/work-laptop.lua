@@ -1,46 +1,73 @@
 -- Work laptop monitor layout and dock/lid-switch handling.
 
-hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto", scale = 1 })
-
--- Catch-all for the dock's monitor(s) until they get a proper desc:-pinned
--- rule (needs physical dock access to read the EDID description).
-hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
-
--- Deliberately no static workspace->monitor pinning here: Hyprland's default
--- (lowest free workspace goes to whichever monitor appears first) is what
--- makes an undocked boot land on workspace 1 on eDP-1, instead of every
--- workspace being locked to the dock's monitor and Hyprland auto-creating
--- workspace 11/12 when only eDP-1 exists.
-
--- Lid switch + monitor recovery. Routed through the native hl.monitor()
--- call (confirmed working re-enable path) rather than "hyprctl keyword
--- monitor" (broken re-enable path for the last active output on Hyprland
--- 0.56.x). Excludes the synthetic "FALLBACK" monitor Hyprland creates when
--- zero real outputs remain, which otherwise fools this exact check.
-local function other_real_monitor_active()
-  local f = io.popen("hyprctl monitors -j | jq '[.[] | select(.name != \"eDP-1\" and .name != \"FALLBACK\" and .disabled == false)] | length'")
-  local n = tonumber(f:read("*a"))
+-- Reads the kernel's actual lid state rather than assuming open, every
+-- config reload (e.g. every nixos-rebuild switch) re-runs this file, and
+-- without this it would unconditionally re-enable eDP-1 even if the lid
+-- is genuinely closed at the time.
+local function lid_is_closed()
+  local f = io.open("/proc/acpi/button/lid/LID0/state")
+  local state = f:read("*a")
   f:close()
-  return (n or 0) > 0
+  return state:find("closed") ~= nil
 end
 
-local function ensure_internal_display()
-  if not other_real_monitor_active() then
-    hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto", scale = 1, disabled = false })
+hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto", scale = 1, disabled = lid_is_closed() })
+
+-- Office dock's two Dell E2420Hs, pinned by EDID description
+local dockLeft = "desc:Dell Inc. DELL E2420H 4R8WL83"
+local dockRight = "desc:Dell Inc. DELL E2420H 4QVXL83"
+
+hl.monitor({ output = dockLeft, mode = "preferred", position = "0x0", scale = 1 })
+hl.monitor({ output = dockRight, mode = "preferred", position = "1920x0", scale = 1 })
+
+for i = 1, 9 do
+  hl.workspace_rule({ workspace = tostring(i), monitor = dockLeft })
+end
+hl.workspace_rule({ workspace = "10", monitor = dockRight })
+-- These rules simply don't match when undocked, so eDP-1 keeps getting
+-- whichever workspace is lowest and free, same as before.
+
+-- Lid switch + monitor recovery. Excludes the synthetic "FALLBACK" monitor
+-- Hyprland creates when zero real outputs remain.
+local function other_real_monitor_active()
+  for _, m in ipairs(hl.get_monitors()) do
+    if m.name ~= "eDP-1" and m.name ~= "FALLBACK" then
+      return true
+    end
   end
+  return false
 end
 
--- Dock unplugged while the lid was already closed: nothing else reacts to
--- a monitor disappearing, so this is what brings the internal panel back
--- instead of leaving zero active outputs.
-hl.on("monitor.removed", ensure_internal_display)
+-- Noctalia doesn't recompute its per-screen bar/wallpaper geometry when the
+-- monitor set changes, leaving them rendered at a stale offset. Its own
+-- "monitors off/on" IPC toggle forces that recompute.
+local function refresh_noctalia_monitors()
+  hl.dispatch(hl.dsp.exec_cmd("noctalia-refresh-monitors"))
+end
 
-hl.bind("switch:off:Lid Switch", ensure_internal_display, { locked = true })
+local function enable_internal_display()
+  hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto", scale = 1, disabled = false })
+  refresh_noctalia_monitors()
+end
+
+-- Dock unplugged: suspend if the lid is actually closed right now, rather
+-- than silently re-enabling eDP-1
+hl.on("monitor.removed", function()
+  if other_real_monitor_active() then return end
+  if lid_is_closed() then
+    hl.dispatch(hl.dsp.exec_cmd("noctalia-lock && systemctl suspend"))
+  else
+    enable_internal_display()
+  end
+end)
+
+hl.bind("switch:off:Lid Switch", enable_internal_display, { locked = true })
 
 hl.bind("switch:on:Lid Switch", function()
   if other_real_monitor_active() then
     hl.monitor({ output = "eDP-1", disabled = true })
+    refresh_noctalia_monitors()
   else
-    hl.dsp.exec_cmd("systemctl suspend")
+    hl.dispatch(hl.dsp.exec_cmd("noctalia-lock && systemctl suspend"))
   end
 end, { locked = true })

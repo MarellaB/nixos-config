@@ -27,6 +27,15 @@
         done
         exit 1
       '';
+
+      # Forces Noctalia to recompute its per-screen bar/wallpaper geometry
+      # (bound to lid-switch/monitor-change hooks in work-laptop.lua).
+      noctaliaRefreshMonitors = pkgs.writeShellScriptBin "noctalia-refresh-monitors" ''
+        pid=$(${pkgs.procps}/bin/pgrep -f 'bin/quickshell -p .*noctalia-shell$') || exit 0
+        ${lib.getExe myNoctalia} ipc --pid "$pid" call monitors off
+        sleep 0.3
+        ${lib.getExe myNoctalia} ipc --pid "$pid" call monitors on
+      '';
     in {
       imports = [ inputs.home-manager.nixosModules.home-manager ];
       home-manager.useGlobalPkgs = true;
@@ -56,6 +65,7 @@
           jq
           myNoctalia
           noctaliaLock
+          noctaliaRefreshMonitors
         ];
 
         home.pointerCursor = {
