@@ -13,6 +13,10 @@ hl.config({
       inactive_border = "rgba(DDDDDD33)",
     },
   },
+  -- Forces new windows to always take the right/bottom half
+  dwindle = {
+    force_split = 2,
+  },
   decoration = {
     rounding = 6,
     active_opacity = 1.0,
