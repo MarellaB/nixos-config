@@ -10,7 +10,7 @@
 		};
 
 		# 2. Automatically detect if this is a Mac or a Linux machine to set the correct home path
-		isDarwin = pkgs.stdenv.isDarwin;
+		isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
 		homeDir  = if isDarwin then "/Users/brandon" else "/home/brandon";
 
 		# 3. Dynamic helper: Get all devices EXCEPT the one we are currently configuring
