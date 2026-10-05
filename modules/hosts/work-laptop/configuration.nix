@@ -64,7 +64,15 @@
 
     boot.loader.timeout = 0;
 
-    boot.plymouth.enable = true;
+    boot.plymouth = {
+      enable = true;
+      theme = "cross_hud";
+      themePackages = [
+        (pkgs.adi1090x-plymouth-themes.override {
+          selected_themes = [ "cross_hud" ];
+        })
+      ];
+    };
     boot.consoleLogLevel = 3;
     boot.initrd.verbose = false;
     boot.kernelParams = [ "quiet" "splash" ];
