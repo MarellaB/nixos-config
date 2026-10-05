@@ -75,6 +75,11 @@
           size = 24;
         };
 
+        services.hypridle = {
+          enable = true;
+          systemdTarget = "hyprland-session.target";
+          settings.general.before_sleep_cmd = "noctalia-lock";
+        };
 
         systemd.user.services = {
           noctalia-shell = {

@@ -55,7 +55,7 @@ end
 hl.on("monitor.removed", function()
   if other_real_monitor_active() then return end
   if lid_is_closed() then
-    hl.dispatch(hl.dsp.exec_cmd("noctalia-lock && systemctl suspend"))
+    hl.dispatch(hl.dsp.exec_cmd("systemctl suspend"))
   else
     enable_internal_display()
   end
@@ -68,6 +68,6 @@ hl.bind("switch:on:Lid Switch", function()
     hl.monitor({ output = "eDP-1", disabled = true })
     refresh_noctalia_monitors()
   else
-    hl.dispatch(hl.dsp.exec_cmd("noctalia-lock && systemctl suspend"))
+    hl.dispatch(hl.dsp.exec_cmd("systemctl suspend"))
   end
 end, { locked = true })

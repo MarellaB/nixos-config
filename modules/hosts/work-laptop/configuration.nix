@@ -62,6 +62,13 @@
 
     systemd.sleep.settings.Sleep.HibernateDelaySec = "16h";
 
+    boot.loader.timeout = 0;
+
+    boot.plymouth.enable = true;
+    boot.consoleLogLevel = 3;
+    boot.initrd.verbose = false;
+    boot.kernelParams = [ "quiet" "splash" ];
+
     networking.hostName = "brandon-marellas-work-laptop";
     networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
