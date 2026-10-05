@@ -58,6 +58,10 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
+    boot.resumeDevice = "/dev/disk/by-uuid/281cd0fc-ee53-4e49-a566-f4b341bb8ccb";
+
+    systemd.sleep.settings.Sleep.HibernateDelaySec = "16h";
+
     networking.hostName = "brandon-marellas-work-laptop";
     networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -164,8 +168,9 @@
     nixpkgs.config.allowUnfree = true;
 
     services.logind.settings.Login = {
-      handlePowerKey = "hibernate";
-      handlePowerKeyLongPress = "ignore";
+      HandlePowerKey = "hibernate";
+      HandlePowerKeyLongPress = "ignore";
+      HandleLidSwitch = "suspend-then-hibernate";
     };
 
     # List packages installed in system profile. To search, run:
