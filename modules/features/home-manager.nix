@@ -46,6 +46,8 @@
       networking.firewall.allowedTCPPorts = [ 53317 ];
       networking.firewall.allowedUDPPorts = [ 53317 ];
 
+      services.blueman.enable = true;
+
       home-manager.users.brandon = {
         home.stateVersion = "25.11";
         home.username = "brandon";
@@ -90,6 +92,22 @@
             };
             Service = {
               ExecStart = lib.getExe myNoctalia;
+              Restart = "on-failure";
+              RestartSec = 1;
+            };
+            Install = {
+              WantedBy = [ "hyprland-session.target" ];
+            };
+          };
+
+          blueman-applet = {
+            Unit = {
+              Description = "Blueman Bluetooth pairing agent";
+              After = [ "hyprland-session.target" ];
+              PartOf = [ "hyprland-session.target" ];
+            };
+            Service = {
+              ExecStart = "${pkgs.blueman}/bin/blueman-applet";
               Restart = "on-failure";
               RestartSec = 1;
             };
