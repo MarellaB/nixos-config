@@ -88,6 +88,7 @@ hl.bind(mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mod .. " + CTRL + SHIFT + 4", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
 hl.bind(mod .. " + CTRL + SHIFT + L", hl.dsp.exec_cmd("noctalia-lock"))
 hl.bind(mod .. " + Space", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
+hl.bind(mod .. " + CTRL + C",hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
 
 -- Auto-center a window. Two dispatches chained in one bind, hence a
 -- callback rather than a single hl.dsp.* expression like the other binds.

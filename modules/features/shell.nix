@@ -35,7 +35,11 @@ let
         nix-direnv.enable = true; # Fast Caching? (Gemini recommendation)
       };
 
-      xdg.configFile."yazi".source = ../../configs/yazi;
+      # Link files individually (not the whole dir) so ~/.config/yazi stays writable:
+      # Noctalia generates flavors/noctalia.yazi at runtime.
+      xdg.configFile."yazi/yazi.toml".source = ../../configs/yazi/yazi.toml;
+      xdg.configFile."yazi/theme.toml".source = ../../configs/yazi/theme.toml;
+      xdg.configFile."yazi/flavors/ghostly.yazi".source = ../../configs/yazi/flavors/ghostly.yazi;
 
       programs.zsh = {
         enable = true;
@@ -211,6 +215,7 @@ let
           clipboard_control = "write-clipboard write-primary read-clipboard read-primary";
           allow_hyperlinks = "yes";
           confirm_os_window_close = 0;
+          remember_window_size = "no";
         };
         font = {
           name = "JetBrainsMono Nerd Font";
