@@ -216,6 +216,10 @@ let
           name = "JetBrainsMono Nerd Font";
           size = 10;
         };
+        # Allow Noctalia's kitty color-palette management
+        extraConfig = ''
+          include themes/noctalia.conf
+        '';
       };
     };
   };

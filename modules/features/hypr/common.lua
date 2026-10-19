@@ -7,7 +7,7 @@ local mod = "SUPER"
 hl.config({
   general = {
     gaps_in = 4,
-    gaps_out = 8,
+    gaps_out = 5,
     col = {
       active_border = "rgba(DDDDDDAA)",
       inactive_border = "rgba(DDDDDD33)",
@@ -18,9 +18,13 @@ hl.config({
     force_split = 2,
   },
   decoration = {
-    rounding = 6,
-    active_opacity = 1.0,
-    inactive_opacity = 0.9,
+    rounding = 4,
+    active_opacity = 0.9,
+    inactive_opacity = 0.7,
+    blur = {
+      noise = 0.03,
+      passes = 2
+    }
   },
   cursor = {
     inactive_timeout = 2,
@@ -83,7 +87,7 @@ hl.bind(mod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mod .. " + CTRL + SHIFT + 4", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
 hl.bind(mod .. " + CTRL + SHIFT + L", hl.dsp.exec_cmd("noctalia-lock"))
-hl.bind(mod .. " + Space", hl.dsp.exec_cmd("noctalia-shell ipc call launcher toggle"))
+hl.bind(mod .. " + Space", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
 
 -- Auto-center a window. Two dispatches chained in one bind, hence a
 -- callback rather than a single hl.dsp.* expression like the other binds.
@@ -118,8 +122,8 @@ hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Multimedia / brightness
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("noctalia shell ipc call brightness increase"), { locked = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("noctalia shell ipc call brightness decrease"), { locked = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("noctalia msg brightness-up"), { locked = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("noctalia msg brightness-down"), { locked = true })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })

@@ -1,0 +1,142 @@
+[bar.default]
+border = "on_surface_variant"
+border_width = 0.5
+center = [ "workspaces" ]
+end = [ "clipboard", "network", "bluetooth", "brightness", "battery", "launcher", "clock" ]
+margin_edge = 5
+margin_ends = 5
+padding = 8
+radius = 4
+start = [ "volume", "media", "audio_visualizer" ]
+
+[battery.device."/org/freedesktop/UPower/devices/battery_hidpp_battery_3"]
+warning_threshold = 10
+
+[battery.device."/org/freedesktop/UPower/devices/headset_dev_58_18_62_AC_9D_DA"]
+warning_threshold = 10
+
+[desktop_widgets]
+enabled = false
+
+[keybinds]
+down = [ "Down", "Ctrl+j" ]
+left = [ "Left", "Ctrl+h" ]
+right = [ "Right", "Ctrl+l" ]
+up = [ "Up", "Ctrl+k" ]
+
+[location]
+address = "Mentor, Ohio"
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@DP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "DP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[osd]
+border = false
+offset_x = 10
+offset_y = 10
+orientation = "vertical"
+position = "top_right"
+position_vertical = "top_right"
+scale = 0.7500000037252903
+
+[shell]
+app_icon_colorize = true
+corner_radius_scale = 0.40000000596046448
+font_family = "JetBrainsMono NF"
+screen_time_enabled = true
+
+    [shell.animation]
+    speed = 1.4000000208616257
+
+    [shell.launcher]
+    categories = false
+    fetch_exchange_rates = false
+
+    [shell.panel]
+    open_near_click_control_center = true
+
+[theme]
+builtin = "Nord"
+community_palette = "Norman"
+custom_palette = "wallhaven-xl39e3-mo"
+mode = "dark"
+pure_black_dark = true
+source = "custom"
+wallpaper_scheme = "m3-monochrome"
+
+    [theme.templates]
+    builtin_ids = [ "btop", "kitty" ]
+    community_ids = [ "yazi" ]
+
+[wallpaper]
+directory = "/home/brandon/nixos-config/wallpapers"
+fill_mode = "stretch"
+transition = [ "disc", "fade", "honeycomb", "stripes", "wipe", "zoom" ]
+
+    [wallpaper.default]
+    path = "/home/brandon/Pictures/Wallpapers/wallhaven_xl39e3.jpg"
+
+    [wallpaper.last]
+    path = "/home/brandon/Pictures/Wallpapers/wallhaven_xl39e3.jpg"
+
+    [wallpaper.monitors.DP-1]
+    path = "/home/brandon/Pictures/Wallpapers/wallhaven_xl39e3.jpg"
+
+[weather]
+unit = "imperial"
+
+[widget.audio_visualizer]
+color_2 = "secondary"
+
+[widget.battery]
+display_mode = "graphic"
+hide_when_full = true
+show_label = false
+
+[widget.launcher]
+glyph = "api-app"
+
+[widget.media]
+hide_album_art = true
+min_length = 220
+title_scroll = "always"
+
+[widget.network]
+show_label = false
+
+[widget.workspaces]
+style = "minimal"

@@ -6,8 +6,6 @@
     import-tree.url = "github:vic/import-tree";
     nvf.url = "github:notashelf/nvf";
 
-    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

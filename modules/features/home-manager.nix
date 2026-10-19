@@ -2,25 +2,10 @@
   flake.nixosModules.homeManager = { pkgs, lib, config, ... }:
     let
       isDesktop = config.networking.hostName == "brandons-nixos-desktop";
-      myNoctalia = inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
-        inherit pkgs;
-        settings = builtins.fromJSON (builtins.readFile (
-          if isDesktop then ./noctalia/desktop.json
-          else ./noctalia/workLaptop.json
-        ));
-      };
-      # Manual lock command (bound to a keybind in common.lua). Noctalia's
-      # IPC can't find the running instance by config path (a bug on this
-      # version -- `noctalia-shell ipc show` reports "No running instances"
-      # even for the exact path it was launched with), so target it by PID
-      # instead. `loginctl lock-session` does NOT reach Noctalia's lock
-      # screen on this version either; its own lockScreen.lock() IPC call
-      # is what actually works. Retries briefly in case it's ever called
-      # before noctalia-shell has finished starting.
+
       noctaliaLock = pkgs.writeShellScriptBin "noctalia-lock" ''
-        for _ in $(seq 1 50); do
-          pid=$(${pkgs.procps}/bin/pgrep -f 'bin/quickshell -p .*noctalia-shell$' || true)
-          if [ -n "$pid" ] && ${lib.getExe myNoctalia} ipc --pid "$pid" call lockScreen lock 2>/dev/null; then
+        for _ in $(seq 1 25); do
+          if ${lib.getExe pkgs.noctalia} msg session lock 2>/dev/null; then
             exit 0
           fi
           sleep 0.2
@@ -31,10 +16,9 @@
       # Forces Noctalia to recompute its per-screen bar/wallpaper geometry
       # (bound to lid-switch/monitor-change hooks in work-laptop.lua).
       noctaliaRefreshMonitors = pkgs.writeShellScriptBin "noctalia-refresh-monitors" ''
-        pid=$(${pkgs.procps}/bin/pgrep -f 'bin/quickshell -p .*noctalia-shell$') || exit 0
-        ${lib.getExe myNoctalia} ipc --pid "$pid" call monitors off
+        ${lib.getExe pkgs.noctalia} msg dpms-off
         sleep 0.3
-        ${lib.getExe myNoctalia} ipc --pid "$pid" call monitors on
+        ${lib.getExe pkgs.noctalia} msg dpms-on
       '';
     in {
       imports = [ inputs.home-manager.nixosModules.home-manager ];
@@ -47,6 +31,15 @@
       networking.firewall.allowedUDPPorts = [ 53317 ];
 
       services.blueman.enable = true;
+
+      programs.noctalia = {
+        enable = true;
+        systemd = {
+          enable = true;
+          target = "hyprland-session.target";
+        };
+        recommendedServices.enable = true;
+      };
 
       home-manager.users.brandon = {
         home.stateVersion = "25.11";
@@ -65,7 +58,6 @@
           anki
           wl-clipboard
           jq
-          myNoctalia
           noctaliaLock
           noctaliaRefreshMonitors
         ];
@@ -84,22 +76,6 @@
         };
 
         systemd.user.services = {
-          noctalia-shell = {
-            Unit = {
-              Description = "Noctalia desktop shell";
-              After = [ "hyprland-session.target" ];
-              PartOf = [ "hyprland-session.target" ];
-            };
-            Service = {
-              ExecStart = lib.getExe myNoctalia;
-              Restart = "on-failure";
-              RestartSec = 1;
-            };
-            Install = {
-              WantedBy = [ "hyprland-session.target" ];
-            };
-          };
-
           blueman-applet = {
             Unit = {
               Description = "Blueman Bluetooth pairing agent";
