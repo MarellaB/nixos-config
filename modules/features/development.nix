@@ -19,6 +19,8 @@ let
         cmake
         nodejs
 
+        sqlit-tui
+
         nixd
         nixfmt
 
