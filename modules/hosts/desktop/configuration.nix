@@ -21,6 +21,13 @@
       syncthingName = "desktop";
     };
 
+    # Speakers, wired headphones, then the WF-1000XM6 (matched by MAC)
+    custom.audioCycle.sinks = [
+      "alsa_output.pci-0000_2b_00.4.analog-stereo"
+      "alsa_output.usb-Generic_Blue_Microphones"
+      "bluez_output.58_18_62_AC_9D_DA"
+    ];
+
     networking.hosts = {
         "127.0.0.1" = [
             "jira.domain"

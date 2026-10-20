@@ -1,13 +1,30 @@
+[audio]
+enable_notification_sounds = false
+enable_power_sounds = false
+enable_screenshot_sounds = false
+enable_sounds = false
+enable_volume_sounds = false
+
 [bar.default]
 border = "on_surface_variant"
 border_width = 0.5
 center = [ "workspaces" ]
-end = [ "network", "bluetooth", "brightness", "battery", "clock", "launcher" ]
+end = [ "bar", "network", "bluetooth", "brightness", "battery", "clock", "launcher" ]
 margin_edge = 5
 margin_ends = 5
 padding = 8
 radius = 4
 start = [ "volume", "media", "audio_visualizer" ]
+widget_spacing = 15
+
+    [bar.default.monitor.DP-2]
+    enabled = false
+
+    [bar.default.monitor.DP-3]
+    enabled = false
+
+    [bar.default.monitor.HDMI-A-1]
+    enabled = false
 
 [battery.device."/org/freedesktop/UPower/devices/battery_hidpp_battery_3"]
 warning_threshold = 10
@@ -30,7 +47,12 @@ address = "Mentor, Ohio"
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
-widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-login-box@FALLBACK", "lockscreen-login-box@DP-1" ]
+widget_order = [
+    "lockscreen-login-box@DP-3",
+    "lockscreen-login-box@DP-2",
+    "lockscreen-login-box@HDMI-A-1",
+    "lockscreen-login-box@DP-1"
+]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -40,11 +62,11 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-login-box@FALLBACK", 
     [lockscreen_widgets.widget."lockscreen-login-box@DP-1"]
     box_height = 196.0
     box_width = 810.0
-    cx = 960.0
-    cy = 898.0
+    cx = 2560.0
+    cy = 1258.0
     output = "DP-1"
-    placement_height = 1080.0
-    placement_width = 1920.0
+    placement_height = 1440.0
+    placement_width = 5120.0
     rotation = 0.0
     type = "login_box"
 
@@ -60,6 +82,63 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-login-box@FALLBACK", 
         show_keyboard_layout = true
         show_login_button = true
         show_media = true
+        show_password_reveal = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-2"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 540.0
+    cy = 1738.0
+    output = "DP-2"
+    placement_height = 1920.0
+    placement_width = 1080.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-2".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_password_reveal = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-3"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 540.0
+    cy = 1738.0
+    output = "DP-3"
+    placement_height = 1920.0
+    placement_width = 1080.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-3".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = true
         show_weather = true
@@ -87,6 +166,34 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-login-box@FALLBACK", 
         show_keyboard_layout = true
         show_login_button = true
         show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 1280.0
+    cy = 1258.0
+    output = "HDMI-A-1"
+    placement_height = 1440.0
+    placement_width = 2560.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = true
         show_weather = true
@@ -127,6 +234,9 @@ position = "top_right"
 position_vertical = "top_right"
 scale = 0.7500000037252903
 
+[plugins]
+enabled = [ "rylos/tailnet" ]
+
 [shell]
 app_icon_colorize = true
 corner_radius_scale = 0.40000000596046448
@@ -157,7 +267,8 @@ wallpaper_scheme = "m3-monochrome"
 
 [wallpaper]
 directory = "/home/brandon/nixos-config/wallpapers"
-fill_mode = "stretch"
+fill_color = "surface"
+fill_mode = "center"
 transition = [ "disc", "fade", "honeycomb", "stripes", "wipe", "zoom" ]
 
     [wallpaper.default]
@@ -181,6 +292,10 @@ unit = "imperial"
 [widget.audio_visualizer]
 color_2 = "secondary"
 
+[widget.bar]
+enable_scroll = false
+type = "rylos/tailnet:bar"
+
 [widget.battery]
 device = "/org/freedesktop/UPower/devices/battery_BAT0"
 display_mode = "graphic"
@@ -203,6 +318,9 @@ title_scroll = "always"
 
 [widget.network]
 show_label = false
+
+[widget.volume.actions]
+middle = "exec audio-cycle"
 
 [widget.workspaces]
 style = "minimal"
